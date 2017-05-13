@@ -1,0 +1,40 @@
+<!--
+  Generated template for the AddMatchPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Dodaj mecz</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+<ion-content padding>
+<ion-list>
+
+  <ion-item>
+    <ion-label floating>Data</ion-label>
+    <ion-input type="date" name="date" [(ngModel)]="match.date"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Stadion</ion-label>
+    <ion-input type="text" name="location" [(ngModel)]="match.location"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Dodatkowe informacje</ion-label>
+    <ion-input type="textarea" name="description" [(ngModel)]="match.description"></ion-input>
+  </ion-item>
+
+
+</ion-list>
+<button block ion-button (click)="submit()">Zapisz</button>
+</ion-content>
+</ion-content>

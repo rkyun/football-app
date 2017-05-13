@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Ionic Blank
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+ 
+
+  
+ <ion-list>
+  <button ion-item *ngFor="let item of list | async">
+    {{item.time | date:'jms' }} - {{ item.name }}
+  </button>  
+  <form>
+  <ion-item>
+    <ion-label floating>Wiadomość</ion-label>
+    <ion-input type="text" name="message.name" [(ngModel)]="message.name"></ion-input>
+  </ion-item>
+  <button block ion-button (click)="addItem()">Dodaj</button>
+  </form>
+</ion-list>
+
+ <ion-list>
+
+
+  
+
+  
+
+</ion-list>
+
+</ion-content>
