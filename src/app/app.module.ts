@@ -4,11 +4,11 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { HttpModule } from '@angular/http';
 import { MyApp } from './app.component';
 
-import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
+
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
+import { MatchPage} from '../pages/match/match';
 import { AddMatchPage } from '../pages/add-match/add-match';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -36,12 +36,11 @@ export const firebaseConfig = {
   declarations: [
     MyApp,
     LoginPage,
-    AboutPage,
-    ContactPage,
     HomePage,
     TabsPage,
     LoginPage,
-    AddMatchPage
+    AddMatchPage,
+    MatchPage
   ],
   imports: [
     BrowserModule,
@@ -52,13 +51,12 @@ export const firebaseConfig = {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    AboutPage,
-    ContactPage,
     HomePage,
     LoginPage,
     TabsPage,
     LoginPage,
-    AddMatchPage
+    AddMatchPage,
+    MatchPage
   ],
   providers: [
     StatusBar,

@@ -1,36 +1,23 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      MECZE
     </ion-title>
+    <button  ion-button (click)="goToAddMatchPage()">Dodaj</button>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-
- 
-
-  
- <ion-list>
-  <button ion-item *ngFor="let item of list | async">
-    {{item.time | date:'jms' }} - {{ item.name }}
+<ion-list>
+  <button ion-item *ngFor="let match of matches | async" (click)="goToMatchPage(match)">
+    {{match.date}} | {{match.location}} | {{match.description}}
   </button>  
-  <form>
+  <!--<form>
   <ion-item>
     <ion-label floating>Wiadomość</ion-label>
     <ion-input type="text" name="message.name" [(ngModel)]="message.name"></ion-input>
   </ion-item>
   <button block ion-button (click)="addItem()">Dodaj</button>
-  </form>
+  </form>-->
 </ion-list>
-
- <ion-list>
-
-
-  
-
-  
-
-</ion-list>
-
 </ion-content>

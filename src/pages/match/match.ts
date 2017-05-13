@@ -31,8 +31,11 @@ export class MatchPage {
       winner: String
     }
   };
+  pickedMatch: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.pickedMatch=navParams.get('pickedMatch');
+    console.log(this.pickedMatch);
   }
 
   ionViewDidLoad() {
