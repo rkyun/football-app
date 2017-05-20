@@ -4,13 +4,15 @@
       MECZE
     </ion-title>
     <button  ion-button (click)="goToAddMatchPage()">Dodaj</button>
+     <button  ion-button (click)="signOut()">Wyloguj</button>
+     
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
 <ion-list>
-  <button ion-item *ngFor="let match of matches | async" (click)="goToMatchPage(match)">
-    {{match.date}} | {{match.location}} | {{match.description}}
+  <button ion-item *ngFor="let match of matches | async" (click)="goToMatchPage(match, match.$key)">
+    {{match.date}} | {{match.location}} | {{match.description}} | {{match.players}} | {{match.$key}}
   </button>  
   <!--<form>
   <ion-item>

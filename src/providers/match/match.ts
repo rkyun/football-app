@@ -50,5 +50,18 @@ match={
   set(match){
     this.matches.push(match);
   }
+  getPlayers(){
+    return this.match.players;
+  }
+
+  
+
+  update(id, match){
+    this.matches.update(id, match);
+  }
+
+  getMatchByKey(key){
+    return this.db.object('/matches/'+key);
+  }
 
 }

@@ -8,6 +8,7 @@
 
   <ion-navbar>
     <ion-title>match</ion-title>
+    Zalogowany: {{currentUser.email}}
   </ion-navbar>
 
 </ion-header>
@@ -15,11 +16,15 @@
 
 <ion-content padding>
   <ion-list>
- 
-    <div>{{pickedMatch.date}}</div>
-    <div>{{pickedMatch.location}}</div>
-    <div>{{pickedMatch.description}}</div>
- 
+<div>{{currentMatch.date}}</div>
+<div>{{currentMatch.description}}</div>
+<div>{{currentMatch.location}}</div>
+<div>{{currentMatch.players}}</div>
+
+    <button ion-button (click)="join()" [style.display]="!isPlayerJoined() ? 'block' : 'none'">Dołącz</button>
+    <button ion-button (click)="leave()" [style.display]="isPlayerJoined() ? 'block' : 'none'">Wyjdz</button>
+
+   
   <!--<form>
   <ion-item>
     <ion-label floating>Wiadomość</ion-label>

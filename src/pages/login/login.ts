@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFireAuth } from 'angularfire2/auth';
+import { AuthProvider} from '../../providers/auth/auth';
+import { TabsPage} from '../tabs/tabs';
+import { RegistrationModalPage } from '../registration-modal/registration-modal';
 import * as firebase from 'firebase/app';
 
 
@@ -16,14 +18,14 @@ import * as firebase from 'firebase/app';
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
-  providers: [AngularFireAuth]
+  providers: [AuthProvider]
 })
 export class LoginPage {
   email = null;
   password = null;
   songs ={};
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public afAuth: AngularFireAuth ) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AuthProvider, public modalCtrl: ModalController ) {
     
   }
 
@@ -32,17 +34,12 @@ export class LoginPage {
   }
 
   login() {
-    
-    this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password).then((response)=>{
-      console.log('Login success', JSON.stringify(response));
-      let currentUser = {
-        email: response.email
-      };
-      window.localStorage.setItem('currentUser', JSON.stringify(currentUser));
-      this.navCtrl.pop();
-    }).catch((error=>{
-      console.log(error);
-    }))
+    this.auth.signIn(this.email, this.password);
+  }
+
+  showRegistrationModal() {
+    let registrationModal = this.modalCtrl.create(RegistrationModalPage)
+    registrationModal.present();
   }
 
 }

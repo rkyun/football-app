@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AngularFireDatabase, FirebaseObjectObservable} from 'angularfire2/database';
+
+import { AuthProvider} from '../../providers/auth/auth';
+import { MatchProvider} from '../../providers/match/match';
 
 /**
  * Generated class for the Match page.
@@ -11,35 +15,63 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 @Component({
   selector: 'page-match',
   templateUrl: 'match.html',
+  providers: [AngularFireDatabase, AuthProvider, MatchProvider]
 })
 export class MatchPage {
-  matches: Object;
-  match={
-    date: Date,
-    location: String,
-    weather: String,
-    description: String,
-    players: {},
-    teams: {
-      red:{},
-      white:{}
-    },
-    status: String,
-    result:{
-      red: Number,
-      white: Number,
-      winner: String
-    }
-  };
-  pickedMatch: any;
+  matchId: String;
+  currentUser: any;
+  match: any;
+  currentMatch: any;
+  
+ 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.pickedMatch=navParams.get('pickedMatch');
-    console.log(this.pickedMatch);
+  constructor(public navCtrl: NavController, public navParams: NavParams, public auth: AuthProvider, public data: MatchProvider) {
+    this.matchId=navParams.get('key');
+    this.match=this.data.getMatchByKey(this.matchId);
+    this.match.forEach(element => {
+           this.currentMatch= element;
+        });
+
+    this.currentUser = auth.getCurrentUser();
+
+   
+   
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad Match');
+  }
+
+  getMatch(){
+    
+  }
+
+  join(){
+    if (this.currentMatch.players){
+      this.currentMatch.players.push(this.currentUser.email);
+      this.data.update(this.matchId,{players:this.currentMatch.players});
+    } else{
+      this.currentMatch.players=[this.currentUser.email];
+      this.data.update(this.matchId,{players: this.currentMatch.players});
+    }
+  }
+
+  leave(){
+    this.currentMatch.players.pop(this.currentUser.email);
+    this.data.update(this.matchId,{players:this.currentMatch.players});
+  }
+
+
+  isPlayerJoined(){
+      let isPlayerJoined=false;   
+      if(this.currentMatch.players){ 
+        this.currentMatch.players.forEach(player=>{
+          if(player==this.currentUser.email){
+            isPlayerJoined = true;
+          }
+        });
+      } 
+      return isPlayerJoined;   
   }
 
 }
