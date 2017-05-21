@@ -26,13 +26,16 @@ export class MatchPage {
  
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public auth: AuthProvider, public data: MatchProvider) {
+    
     this.matchId=navParams.get('key');
     this.match=this.data.getMatchByKey(this.matchId);
     this.match.forEach(element => {
            this.currentMatch= element;
         });
-
+        
     this.currentUser = auth.getCurrentUser();
+
+    
 
    
    
@@ -72,6 +75,16 @@ export class MatchPage {
         });
       } 
       return isPlayerJoined;   
+  }
+
+  random(){
+    let teams = this.data.randomizeTeam(this.currentMatch.players.slice());
+    this.currentMatch.teams={};
+    this.currentMatch.teams["red"]=teams[0];
+    this.currentMatch.teams["white"]=teams[1];
+   
+    console.log(this.currentMatch);
+    this.data.update(this.matchId,{teams:this.currentMatch.teams});
   }
 
 }

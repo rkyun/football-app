@@ -19,8 +19,8 @@ match={
     description: String,
     players: [],
     teams: {
-      red:{},
-      white:{}
+      red:[],
+      white:[]
     },
     status: String,
     result:{
@@ -62,6 +62,30 @@ match={
 
   getMatchByKey(key){
     return this.db.object('/matches/'+key);
+  }
+
+  randomizeTeam(players){
+    let rand;
+    let player;
+    let _players=players.slice();
+    let red=[];
+    let white=[];
+    
+
+    for(let i=0; i<players.length; i++){
+      rand=Math.floor(Math.random()*_players.length);
+      player=_players[rand];
+      console.log(player);
+      if (i % 2 == 0){   
+          red.push(player);
+      } else{
+          white.push(player);
+      }
+      _players.splice(rand, 1);
+    }
+    
+  return [red, white];
+    
   }
 
 }

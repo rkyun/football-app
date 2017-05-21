@@ -20,9 +20,13 @@
 <div>{{currentMatch.description}}</div>
 <div>{{currentMatch.location}}</div>
 <div>{{currentMatch.players}}</div>
+<div >RED: {{currentMatch.teams?.white}}</div>
+<div>WHITE: {{currentMatch.teams?.red}}</div>
 
     <button ion-button (click)="join()" [style.display]="!isPlayerJoined() ? 'block' : 'none'">Dołącz</button>
     <button ion-button (click)="leave()" [style.display]="isPlayerJoined() ? 'block' : 'none'">Wyjdz</button>
+
+    <button ion-button (click)="random()">Losuj</button>
 
    
   <!--<form>
