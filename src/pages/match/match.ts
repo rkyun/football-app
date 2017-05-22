@@ -24,6 +24,7 @@ export class MatchPage {
   currentUser: any;
   match: any;
   currentMatch: any;
+  pickedPlayer: any;
   
   constructor(public navCtrl: NavController, public navParams: NavParams, public auth: AuthProvider, public data: MatchProvider, public modalCtrl: ModalController) {
     
@@ -87,11 +88,21 @@ export class MatchPage {
   }
 
   addPlayer(){
-
+    //todo
   }
 
-  removePlayer(){
+  removePlayer(pickedPlayer){
+    this.currentMatch.players.forEach((player, index)=>{
+        if(pickedPlayer==player.name){
+            this.currentMatch.players.splice(index, 1);
+        }
+    });
+    this.data.update(this.matchId,{players:this.currentMatch.players});
+    this.pickedPlayer=null;
+  }
 
+  pickPlayer(ziom){
+   this.pickedPlayer=ziom;
   }
 
   showGuestModal() {

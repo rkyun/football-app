@@ -12,7 +12,7 @@
 <ion-content padding>
 <ion-list>
   <button ion-item *ngFor="let match of matches | async" (click)="goToMatchPage(match, match.$key)">
-    {{match.date}} | {{match.location}} | {{match.description}} | {{match.players}} | {{match.$key}}
+    {{match.date}} | Graczy: {{match.players?.length}}
   </button>  
   <!--<form>
   <ion-item>
