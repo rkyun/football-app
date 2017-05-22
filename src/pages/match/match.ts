@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseObjectObservable} from 'angularfire2/database';
+
+import { GuestModal } from '../guest-modal/guest-modal';
 
 import { AuthProvider} from '../../providers/auth/auth';
 import { MatchProvider} from '../../providers/match/match';
@@ -23,9 +25,7 @@ export class MatchPage {
   match: any;
   currentMatch: any;
   
- 
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, public auth: AuthProvider, public data: MatchProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public auth: AuthProvider, public data: MatchProvider, public modalCtrl: ModalController) {
     
     this.matchId=navParams.get('key');
     this.match=this.data.getMatchByKey(this.matchId);
@@ -33,12 +33,7 @@ export class MatchPage {
            this.currentMatch= element;
         });
         
-    this.currentUser = auth.getCurrentUser();
-
-    
-
-   
-   
+    this.currentUser = auth.getCurrentUser(); 
   }
 
   ionViewDidLoad() {
@@ -50,26 +45,30 @@ export class MatchPage {
   }
 
   join(){
+    let player = {name:this.currentUser.email,status:"user"};
     if (this.currentMatch.players){
-      this.currentMatch.players.push(this.currentUser.email);
+      this.currentMatch.players.push(player);
       this.data.update(this.matchId,{players:this.currentMatch.players});
     } else{
-      this.currentMatch.players=[this.currentUser.email];
+      this.currentMatch.players=[player];
       this.data.update(this.matchId,{players: this.currentMatch.players});
     }
   }
 
   leave(){
-    this.currentMatch.players.pop(this.currentUser.email);
+    this.currentMatch.players.forEach((player, index)=>{
+        if(player.name==this.currentUser.email && player.status=="user"){
+            this.currentMatch.players.splice(index, 1);
+        }
+    });
     this.data.update(this.matchId,{players:this.currentMatch.players});
   }
-
 
   isPlayerJoined(){
       let isPlayerJoined=false;   
       if(this.currentMatch.players){ 
         this.currentMatch.players.forEach(player=>{
-          if(player==this.currentUser.email){
+          if(player.name==this.currentUser.email){
             isPlayerJoined = true;
           }
         });
@@ -85,6 +84,19 @@ export class MatchPage {
    
     console.log(this.currentMatch);
     this.data.update(this.matchId,{teams:this.currentMatch.teams});
+  }
+
+  addPlayer(){
+
+  }
+
+  removePlayer(){
+
+  }
+
+  showGuestModal() {
+    let registrationModal = this.modalCtrl.create(GuestModal, {matchId: this.matchId, match: this.currentMatch})
+    registrationModal.present();
   }
 
 }

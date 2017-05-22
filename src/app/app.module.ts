@@ -10,7 +10,8 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
 import { MatchPage} from '../pages/match/match';
 import { AddMatchPage } from '../pages/add-match/add-match';
-import { RegistrationModalPage} from '../pages/registration-modal/registration-modal'
+import { RegistrationModalPage} from '../pages/registration-modal/registration-modal';
+import { GuestModal} from '../pages/guest-modal/guest-modal';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -44,7 +45,8 @@ export const firebaseConfig = {
     LoginPage,
     AddMatchPage,
     MatchPage,
-    RegistrationModalPage
+    RegistrationModalPage,
+    GuestModal
   ],
   imports: [
     BrowserModule,
@@ -61,7 +63,8 @@ export const firebaseConfig = {
     LoginPage,
     AddMatchPage,
     MatchPage,
-    RegistrationModalPage
+    RegistrationModalPage,
+    GuestModal
     
   ],
   providers: [

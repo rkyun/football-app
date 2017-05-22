@@ -54,8 +54,6 @@ match={
     return this.match.players;
   }
 
-  
-
   update(id, match){
     this.matches.update(id, match);
   }
@@ -71,7 +69,6 @@ match={
     let red=[];
     let white=[];
     
-
     for(let i=0; i<players.length; i++){
       rand=Math.floor(Math.random()*_players.length);
       player=_players[rand];
@@ -83,9 +80,7 @@ match={
       }
       _players.splice(rand, 1);
     }
-    
   return [red, white];
-    
   }
 
 }

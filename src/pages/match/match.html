@@ -19,22 +19,14 @@
 <div>{{currentMatch.date}}</div>
 <div>{{currentMatch.description}}</div>
 <div>{{currentMatch.location}}</div>
-<div>{{currentMatch.players}}</div>
-<div >RED: {{currentMatch.teams?.white}}</div>
-<div>WHITE: {{currentMatch.teams?.red}}</div>
+<div><span *ngFor="let player of currentMatch.players">{{player.name}} </span></div>
+<div >RED: <span *ngFor="let player of currentMatch.teams.red">{{player.name}} </span></div>
+<div>WHITE: <span *ngFor="let player of currentMatch.teams.white">{{player.name}} </span></div>
 
     <button ion-button (click)="join()" [style.display]="!isPlayerJoined() ? 'block' : 'none'">Dołącz</button>
     <button ion-button (click)="leave()" [style.display]="isPlayerJoined() ? 'block' : 'none'">Wyjdz</button>
 
     <button ion-button (click)="random()">Losuj</button>
-
-   
-  <!--<form>
-  <ion-item>
-    <ion-label floating>Wiadomość</ion-label>
-    <ion-input type="text" name="message.name" [(ngModel)]="message.name"></ion-input>
-  </ion-item>
-  <button block ion-button (click)="addItem()">Dodaj</button>
-  </form>-->
+    <button ion-button (click)="showGuestModal()">Dodaj gracza</button>
 </ion-list>
 </ion-content>
