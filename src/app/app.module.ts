@@ -12,6 +12,7 @@ import { MatchPage} from '../pages/match/match';
 import { AddMatchPage } from '../pages/add-match/add-match';
 import { RegistrationModalPage} from '../pages/registration-modal/registration-modal';
 import { GuestModal} from '../pages/guest-modal/guest-modal';
+import { AddStadiumPage} from '../pages/add-stadium/add-stadium';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -22,6 +23,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 
 import { MatchProvider } from '../providers/match/match';
 import { AuthProvider } from '../providers/auth/auth';
+import { StadiumProvider } from '../providers/stadium/stadium';
 
  
 // AF2 Settings
@@ -46,7 +48,8 @@ export const firebaseConfig = {
     AddMatchPage,
     MatchPage,
     RegistrationModalPage,
-    GuestModal
+    GuestModal,
+    AddStadiumPage
   ],
   imports: [
     BrowserModule,
@@ -64,7 +67,8 @@ export const firebaseConfig = {
     AddMatchPage,
     MatchPage,
     RegistrationModalPage,
-    GuestModal
+    GuestModal,
+    AddStadiumPage
     
   ],
   providers: [
@@ -73,6 +77,7 @@ export const firebaseConfig = {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     MatchProvider,
     AuthProvider,
+    StadiumProvider,
   ]
 })
 export class AppModule {}

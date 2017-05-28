@@ -6,13 +6,15 @@ import { MatchPage } from '../match/match';
 import { AddMatchPage } from '../add-match/add-match';
 import { MatchProvider} from '../../providers/match/match';
 import { AuthProvider} from '../../providers/auth/auth';
+import { AddStadiumPage} from '../add-stadium/add-stadium';
+import { StadiumProvider } from '../../providers/stadium/stadium';
 
 
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
-  providers: [AngularFireDatabase, MatchProvider, AuthProvider ]
+  providers: [AngularFireDatabase, MatchProvider, AuthProvider, StadiumProvider ]
 })
 export class HomePage {
   matches: any;
@@ -33,29 +35,57 @@ export class HomePage {
       winner: String
     }
   };
+  stadions=[];
  
 
   
 
-  constructor(public navCtrl: NavController, public data: MatchProvider, public auth: AuthProvider) {
-   this.matches = data.get();
-   console.log("siema");
-   console.log(this.matches);
+  constructor(public navCtrl: NavController, public data: MatchProvider, public stad: StadiumProvider, public auth: AuthProvider) {
+   this.matches = data.get()
+   this.matches.location={};
+   this.matches.forEach((element,i) => {   
+     element.forEach((el,index)=>{
+       this.getStadium(el.stadiumId).forEach(e=>
+       {
+            this.stadions.push(e);
+            console.log(e);
    
-    console.log("siema");
+       });
+       
+     })
+    
+   });
+
+
+   console.log(this.stadions);
+   
+   
+
+ 
+    
+   
+   
   }
 
   goToAddMatchPage(){
     this.navCtrl.push(AddMatchPage);
   }
 
-  goToMatchPage(match, key){
-    this.navCtrl.push(MatchPage,{'match':match, 'key': key});
+  goToAddStadiumPage(){
+    this.navCtrl.push(AddStadiumPage);
+  }
+
+  goToMatchPage(match, key, stadiumId){
+    this.navCtrl.push(MatchPage,{'match':match, 'key': key, 'stadiumId': stadiumId});
     
   }
 
   signOut(){
     this.auth.signOut();
+  }
+
+  getStadium(stadiumId){
+      return this.stad.getStadiumByKey(stadiumId);
   }
 
   

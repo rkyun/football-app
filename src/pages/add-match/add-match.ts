@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
 import { MatchProvider} from '../../providers/match/match';
-
+import {StadiumProvider} from '../../providers/stadium/stadium';
+import { HomePage } from '../home/home';
 /**
  * Generated class for the AddMatchPage page.
  *
@@ -13,20 +14,21 @@ import { MatchProvider} from '../../providers/match/match';
 @Component({
   selector: 'page-add-match',
   templateUrl: 'add-match.html',
-  providers: [AngularFireDatabase, MatchProvider]
+  providers: [AngularFireDatabase, MatchProvider, StadiumProvider]
 })
 export class AddMatchPage {
-  matches:{};
-  
    match ={
+    type: null,
     date: null,
+    time: null,
+    timestamp: null,
     location: null,
     weather: null,
     description: null,
-    players: {},
+    players: [],
     teams: {
-      red:{},
-      white:{}
+      red:[],
+      white:[]
     },
     status: null,
     result:{
@@ -36,9 +38,11 @@ export class AddMatchPage {
     }
   };
   data: any;
+  stadiums: any;
   
-  constructor(public navCtrl: NavController, public navParams: NavParams,public _data: MatchProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public _data: MatchProvider, public stadium: StadiumProvider) {
    this.data=_data;
+   this.stadiums=stadium.get();
    console.log('siema z konstruktora');
   }
 
@@ -48,10 +52,18 @@ export class AddMatchPage {
     console.log('ionViewDidLoad AddMatchPage');
     console.log('SIEMA');
   }
-  
+ 
   submit(){
+    this.match.timestamp=Math.floor(Date.parse(new Date(this.match.date + ' ' + this.match.time).toUTCString())/ 1000);
+    
+    this.match.status="Planowany";
     this.data.set(this.match);
-     this.navCtrl.pop();
+    this.navCtrl.push(HomePage);
   }
+  
+  getStadiums(){
+
+  }
+  
 
 }

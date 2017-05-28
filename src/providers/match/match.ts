@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/map';
 import { AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
 
@@ -14,7 +15,7 @@ export class MatchProvider {
 matches: FirebaseListObservable<any>;
 match={
     date: Date,
-    location: String,
+    stadiumId: String,
     weather: String,
     description: String,
     players: [],
@@ -81,6 +82,11 @@ match={
       _players.splice(rand, 1);
     }
   return [red, white];
-  }
+}
+
+getWeather(lang,long): Observable<any>{
+  return this.http.get(`http://api.openweathermap.org/data/2.5/forecast?lat=${lang}&lon=${long}&appid=e81bf78a7952363f796415666970a605&units=metric`)
+  .map(response => response.json());
+}
 
 }

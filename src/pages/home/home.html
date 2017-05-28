@@ -5,14 +5,19 @@
     </ion-title>
     <button  ion-button (click)="goToAddMatchPage()">Dodaj</button>
      <button  ion-button (click)="signOut()">Wyloguj</button>
+     <button  ion-button (click)="goToAddStadiumPage()">stadion</button>
      
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
 <ion-list>
-  <button ion-item *ngFor="let match of matches | async" (click)="goToMatchPage(match, match.$key)">
+  <button ion-item *ngFor="let match of matches | async; let i = index" (click)="goToMatchPage(match, match.$key, match.stadiumId)">
     {{match.date}} | Graczy: {{match.players?.length}}
+   {{match.location?.name}}dd
+   {{match.location?.address}} 
+
+   {{stadions[i]?.name}}
   </button>  
   <!--<form>
   <ion-item>

@@ -19,7 +19,9 @@
     
 <div>{{currentMatch.date}}</div>
 <div>{{currentMatch.description}}</div>
-<div>{{currentMatch.location}}</div>
+<div>{{currentMatch.location}}</div>d
+<div>{{stadium?.name}}</div>
+<div>{{stadium?.address}}</div>
 <div><span *ngFor="let player of currentMatch.players" [ngClass]="{'selected' : player.name===pickedPlayer}" (click)="pickPlayer(player.name)">{{player.name}} </span></div>
 <div>RED: <span *ngFor="let player of currentMatch.teams?.red" >{{player.name}} </span></div>
 <div>WHITE: <span *ngFor="let player of currentMatch.teams?.white" >{{player.name}} </span></div>
