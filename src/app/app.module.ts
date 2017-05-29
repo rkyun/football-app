@@ -6,7 +6,6 @@ import { MyApp } from './app.component';
 
 
 import { HomePage } from '../pages/home/home';
-import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
 import { MatchPage} from '../pages/match/match';
 import { AddMatchPage } from '../pages/add-match/add-match';
@@ -43,7 +42,6 @@ export const firebaseConfig = {
     MyApp,
     LoginPage,
     HomePage,
-    TabsPage,
     LoginPage,
     AddMatchPage,
     MatchPage,
@@ -62,7 +60,6 @@ export const firebaseConfig = {
     MyApp,
     HomePage,
     LoginPage,
-    TabsPage,
     LoginPage,
     AddMatchPage,
     MatchPage,

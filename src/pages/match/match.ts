@@ -141,6 +141,15 @@ export class MatchPage {
     let temp;
     let closestTimeStamp=null;
     let closestIndex=null;
+    let currentDate=new Date();
+    let matchDate=new Date(this.currentMatch.date + " " + this.currentMatch.time);
+    var timeDiff = Math.abs(currentDate.getTime() - matchDate.getTime());
+    var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
+
+    console.log(diffDays);
+
+    console.log(currentDate, matchDate);
+    if( diffDays < 6){
     this.data.getWeather(this.stadium.lat,this.stadium.long).subscribe(
       weather => {
         weather.list.forEach((day, index)=>{
@@ -158,9 +167,13 @@ export class MatchPage {
             }
           }
         });
-        console.log(weather.list[closestIndex].main.temp);
+        this.currentMatch.weather=Math.round(weather.list[closestIndex].main.temp);
       }
     );
+  } else{
+    this.currentMatch.weather="-"
+    
+  }
   }
 
 }

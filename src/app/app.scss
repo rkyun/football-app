@@ -14,3 +14,51 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+body, span, button, h1, h2, h3, h4, h5, h6, p, ion-item, ion-title{
+    font-family: 'Oswald', sans-serif !important;
+}
+.header{
+    padding: 0 10px;
+	min-height: 75px;
+	color: white;
+	background: url("../assets/images/back.png") center center no-repeat;
+    background-size: cover;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+
+    .nav-button{
+        background: 0;
+        i{
+            color:#efefef;
+            font-size: 22px;
+            margin: 0 3px;
+        }
+    }
+}
+
+
+.toolbar{
+    .toolbar-background{
+        background: none;
+
+    }
+    color: white;
+
+    .title{
+        color: white;
+        .toolbar-title{
+            color: white;
+        }
+    }
+
+    .back-button-icon{
+        color: white;
+    }
+}
+
+
+.content{
+    background: #F6F6F6;
+}
