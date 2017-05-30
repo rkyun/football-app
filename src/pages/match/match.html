@@ -4,34 +4,76 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
+<ion-header class="match-header">
+  <div class="header-info">
+    <ion-navbar>
+      <ion-title></ion-title>
+    </ion-navbar>
+    <button class="nav-button"><i class="fa fa-home"></i></button>
+    <button class="nav-button"><i class="fa fa-cog"></i></button>
+  </div>
+  <div class="match-info">
+    <div class="top">
+     <p><i class="fa fa-futbol-o"></i>{{currentMatch.type}}</p>
+     <p><i class="fa fa-clock-o"></i>{{currentMatch.timestamp*1000 |date:' hh:mm'}}</p>
+   </div>
+   <div class="middle">
+     <p class="team">Red</p>
+     <p class="versus">VS</p>
+     <p class="team">White</p>
+   </div>
+   <div class="bottom">
+     <p><i class="fa fa-calendar"></i>{{currentMatch.timestamp*1000 |date:'MMM d'}}</p>
+     <p><i class="fa fa-thermometer-half" aria-hidden="true"></i>{{currentMatch.weather}}</p>
+     <p><i class="fa fa-map-marker"></i>{{stadium?.name}}</p>
+   </div>
+     <div class="segments">
+  <ion-segment [(ngModel)]="matchInfo">
+    <ion-segment-button value="players">
+      <i class="fa fa-users"></i>
+    </ion-segment-button>
+    <ion-segment-button value="chat">
+     <i class="fa fa fa-comments"></i>
+    </ion-segment-button>
+  </ion-segment>
+</div>
+     
+  </div>
+  
 
-  <ion-navbar>
-    <ion-title>match</ion-title>
-  </ion-navbar>
-  <button class="nav-button"><i class="fa fa-home"></i></button>
-  <button class="nav-button"><i class="fa fa-cog"></i></button>
 
 </ion-header>
 
 
 <ion-content padding>
-  <ion-list>
-    
-<div>{{currentMatch.date}}</div>
-<div>{{currentMatch.description}}</div>
-<div>{{currentMatch.location}}</div>
-<div>{{currentMatch.weather}}</div>d
-<div>{{stadium?.name}}</div>
-<div>{{stadium?.address}}</div>
-<div><span *ngFor="let player of currentMatch.players" [ngClass]="{'selected' : player.name===pickedPlayer}" (click)="pickPlayer(player.name)">{{player.name}} </span></div>
-<div>RED: <span *ngFor="let player of currentMatch.teams?.red" >{{player.name}} </span></div>
-<div>WHITE: <span *ngFor="let player of currentMatch.teams?.white" >{{player.name}} </span></div>
+  
+    <div [ngSwitch]="matchInfo">
+  <ion-list *ngSwitchCase="'players'">
+    <div class="player-list">
+      <div class="player-item" *ngFor="let player of currentMatch.players" [ngClass]="{'selected' : player.name===pickedPlayer}" (click)="pickPlayer(player.name)">
+          <div class="number"><p>27</p></div>
+          <div class="name"><p>{{player.name}}</p></div>
+      </div>
+      
+    </div>
 
-    <button ion-button (click)="join()" [style.display]="!isPlayerJoined() ? 'block' : 'none'">Dołącz</button>
+   <!--<div><span *ngFor="let player of currentMatch.players" [ngClass]="{'selected' : player.name===pickedPlayer}" (click)="pickPlayer(player.name)">{{player.name}} </span></div>
+<div>RED: <span *ngFor="let player of currentMatch.teams?.red" >{{player.name}} </span></div>
+<div>WHITE: <span *ngFor="let player of currentMatch.teams?.white" >{{player.name}} </span></div>-->
+
+    <!--<button ion-button (click)="join()" [style.display]="!isPlayerJoined() ? 'block' : 'none'">Dołącz</button>
         <button ion-button (click)="leave()" [style.display]="isPlayerJoined() ? 'block' : 'none'">Wyjdz</button>
     <button ion-button (click)="random()">Losuj</button>
-    <button ion-button (click)="showGuestModal()">Dodaj gracza</button>
-    <button ion-button warning [style.display]="pickedPlayer ? 'block' : 'none'" (click)="removePlayer(pickedPlayer)">Usuń gracza</button>
-</ion-list>
+    
+    <button ion-button warning [style.display]="pickedPlayer ? 'block' : 'none'" (click)="removePlayer(pickedPlayer)">Usuń gracza</button>-->
+  <button ion-button (click)="showGuestModal()">Dodaj gracza</button>
+  </ion-list>
+
+  <ion-list *ngSwitchCase="'chat'">
+    czat
+  </ion-list>
+</div>
+
+
+
 </ion-content>

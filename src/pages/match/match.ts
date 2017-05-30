@@ -29,9 +29,10 @@ export class MatchPage {
   pickedPlayer: any;
   stadium: any;
   currentStadium: any;
+  matchInfo: any;
   
   constructor(public navCtrl: NavController, public navParams: NavParams, public auth: AuthProvider, public data: MatchProvider, public stadiumProvider: StadiumProvider, public modalCtrl: ModalController, ) {
-    
+    this.matchInfo='players';
     this.matchId=navParams.get('key');
     this.stadiumId=navParams.get('stadiumId');
     this.match=this.data.getMatchByKey(this.matchId);
