@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
 
 
 
@@ -17,10 +18,17 @@ import { AngularFireAuth } from 'angularfire2/auth';
 */
 @Injectable()
 export class AuthProvider {
-  
+ 
+  users: FirebaseListObservable<any>;
+  user={
+    id: null,
+    name: "Mietek",
+    number: "12"
+  };
 
-  constructor(public http: Http, public afAuth: AngularFireAuth) {
+  constructor(public http: Http, public afAuth: AngularFireAuth, public db: AngularFireDatabase ) {
     console.log('Hello AuthProvider Provider');
+    this.users = db.list('/users');
   }
 
   signIn(email,password) {
@@ -41,6 +49,11 @@ export class AuthProvider {
   signUp(email,password){
     this.afAuth.auth.createUserWithEmailAndPassword(email,password).then((response)=>{
       console.log('Registration completed')
+      this.user.id=response.uid;
+      
+      this.users.push(this.user).then(() => {
+        console.log("custom user registration succes");
+      });
     }).catch((error=>{
       console.log(error);
     }))
@@ -55,6 +68,10 @@ export class AuthProvider {
   getCurrentUser(){
     return this.afAuth.auth.currentUser;
     
+  }
+
+  getUserByKey(key){
+    return this.db.object('/users/'+key);
   }
 
   

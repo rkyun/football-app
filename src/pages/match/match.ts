@@ -30,32 +30,34 @@ export class MatchPage {
   stadium: any;
   currentStadium: any;
   matchInfo: any;
+  user: any;
+  currentUserInfo: any;
   
   constructor(public navCtrl: NavController, public navParams: NavParams, public auth: AuthProvider, public data: MatchProvider, public stadiumProvider: StadiumProvider, public modalCtrl: ModalController, ) {
-    this.matchInfo='players';
-    this.matchId=navParams.get('key');
-    this.stadiumId=navParams.get('stadiumId');
-    this.match=this.data.getMatchByKey(this.matchId);
+        this.matchInfo='players';
+        this.matchId=navParams.get('key');
+        this.stadiumId=navParams.get('stadiumId');
+        this.match=this.data.getMatchByKey(this.matchId);
    
-       this.match.forEach(element => {
-           this.currentMatch= element;
-        });
+        this.match.forEach(element => {
+            this.currentMatch= element;
+          });
 
-     this.stadiumProvider.getStadiumByKey(this.stadiumId).forEach(element=>{
-        this.stadium= element;
-      })
-
-        
-      
-     
+        this.stadiumProvider.getStadiumByKey(this.stadiumId).forEach(element=>{
+            this.stadium= element;
+          })
     
+        this.currentUser = auth.getCurrentUser();
+        console.log(this.currentUser.uid, 'userid');
 
-       
 
+        this.auth.getUserByKey(this.currentUser.uid).forEach(element=>{
+              this.currentUserInfo= element;   
+              console.log('elko');
+        }); 
 
-     
-    
-    this.currentUser = auth.getCurrentUser(); 
+        console.log(this.currentUserInfo, 'userinfo');
+ 
   }
 
   ionViewDidLoad() {
@@ -64,9 +66,8 @@ export class MatchPage {
       setTimeout(()=>{
         console.log(this.stadium, "Wybrany stadion");
          this.getWeather();
+          
     }, 250);
-       
-   
   }
 
   getMatch(){
@@ -74,7 +75,7 @@ export class MatchPage {
   }
 
   join(){
-    let player = {name:this.currentUser.email,status:"user"};
+    let player = {uid:this.currentUser.uid,name:this.currentUser.email,status:"user"};
     if (this.currentMatch.players){
       this.currentMatch.players.push(player);
       this.data.update(this.matchId,{players:this.currentMatch.players});

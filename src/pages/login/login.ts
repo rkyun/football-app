@@ -5,6 +5,8 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AuthProvider} from '../../providers/auth/auth';
 import { TabsPage} from '../tabs/tabs';
 import { RegistrationModalPage } from '../registration-modal/registration-modal';
+import { AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
+
 import * as firebase from 'firebase/app';
 
 
@@ -23,9 +25,8 @@ import * as firebase from 'firebase/app';
 export class LoginPage {
   email = null;
   password = null;
-  songs ={};
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AuthProvider, public modalCtrl: ModalController ) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AuthProvider, public modalCtrl: ModalController) {
     
   }
 
