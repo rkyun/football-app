@@ -59,6 +59,14 @@ body, span, button, h1, h2, h3, h4, h5, h6, p, ion-item, ion-title{
 }
 
 
-.content{
-    background: #F6F6F6;
+
+
+.list-md .item-input:last-child {
+    border: 0;
+}
+.item-md.item-input.input-has-focus .item-inner{
+    box-shadow: none;
+}
+.item-md.item-input.input-has-focus:last-child{
+    box-shadow: none;
 }

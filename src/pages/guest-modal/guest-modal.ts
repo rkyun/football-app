@@ -29,7 +29,7 @@ export class GuestModal {
   }
 
   submit(){
-    let player = {name:this.name,status:"guest"};
+    let player = {uid:new Date().getUTCMilliseconds(),name:this.name,status:"guest", number:"#"};
     if (this.match.players){
       this.match.players.push(player);
       this.data.update(this.matchId,{players:this.match.players});

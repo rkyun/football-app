@@ -17,8 +17,11 @@ import { AngularFireAuth } from 'angularfire2/auth';
   providers: [AuthProvider, AngularFireAuth]
 })
 export class RegistrationModalPage {
+  name: String;
   email: String;
   password: String;
+  number: String;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public auth: AuthProvider, public viewCtrl: ViewController) {
   }
 
@@ -27,7 +30,7 @@ export class RegistrationModalPage {
   }
 
   submit(){
-    this.auth.signUp(this.email, this.password);
+    this.auth.signUp(this.email, this.password, this.name, this. number);
     this.viewCtrl.dismiss();
     
   }

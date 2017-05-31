@@ -149,6 +149,46 @@ page-match {
     }
 }
 
-.content{
-    background: linear-gradient(to bottom, #EEE 0%,rgba(125,185,232,0) 100%);
+.random-teams{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    .red{
+        width: 50%;
+    }
+
+    .white{
+        width: 50%;
+    }
+
+    .player-item{
+        justify-content: center;
+        width: 100%;
+         border-bottom: 1px solid #eee;
+         padding: 5px 0;
+        margin-bottom: 10px;
+        display: flex;
+        flex-direction: row;
+        .number{
+            width: 30px;
+            height: 30px;
+            background: #990B0B;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin: 0;
+
+            p{
+                color: white;
+                font-weight: 900;
+                margin: 0;
+            }
+        }
+        .name{
+            p{
+                margin: 0 5px;
+                line-height: 30px;
+            }
+        }
+    }
 }

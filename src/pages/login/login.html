@@ -4,30 +4,23 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
-
-  <ion-navbar>
-    <ion-title>Login</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
 
 <ion-content padding>
+  <img src="../../assets/images/at_team_2.png" class="logo">
 <ion-list>
 
   <ion-item>
-    <ion-label floating>Username</ion-label>
-    <ion-input type="text" name="email" [(ngModel)]="email"></ion-input>
+    <ion-input type="text" name="email" [(ngModel)]="email" placeholder="E-mail"></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-label floating>Password</ion-label>
-    <ion-input type="password" name="password" [(ngModel)]="password"></ion-input>
+    <ion-input type="password" name="password" [(ngModel)]="password" placeholder="Hasło"></ion-input>
   </ion-item>
 
 </ion-list>
-<button block ion-button (click)="login()">Log in</button>
+<div class="options">
+  <button class="login" ion-button (click)="login()">Login</button>
+  <button class="sigin" ion-button (click)="showRegistrationModal()">Rejestracja</button>
+</div>
 
- <a (click)="showRegistrationModal()">Zarejestruj się</a>
 </ion-content>

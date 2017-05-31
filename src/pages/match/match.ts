@@ -50,13 +50,17 @@ export class MatchPage {
         this.currentUser = auth.getCurrentUser();
         console.log(this.currentUser.uid, 'userid');
 
+        this.auth.getUserByKey(this.currentUser.uid).then(res=>{
+            this.currentUserInfo=res;
+            
+        }).catch(err=>{
+          
+        });
 
-        this.auth.getUserByKey(this.currentUser.uid).forEach(element=>{
-              this.currentUserInfo= element;   
-              console.log('elko');
-        }); 
 
-        console.log(this.currentUserInfo, 'userinfo');
+        
+
+        
  
   }
 
@@ -66,8 +70,17 @@ export class MatchPage {
       setTimeout(()=>{
         console.log(this.stadium, "Wybrany stadion");
          this.getWeather();
+
+          
           
     }, 250);
+
+     
+    
+  }
+
+  ionViewDidEnter(){
+     
   }
 
   getMatch(){
@@ -75,7 +88,7 @@ export class MatchPage {
   }
 
   join(){
-    let player = {uid:this.currentUser.uid,name:this.currentUser.email,status:"user"};
+    let player = {uid:this.currentUser.uid,name:this.currentUserInfo.name,number:this.currentUserInfo.number,status:"user"};
     if (this.currentMatch.players){
       this.currentMatch.players.push(player);
       this.data.update(this.matchId,{players:this.currentMatch.players});
@@ -87,7 +100,7 @@ export class MatchPage {
 
   leave(){
     this.currentMatch.players.forEach((player, index)=>{
-        if(player.name==this.currentUser.email && player.status=="user"){
+        if(player.uid==this.currentUser.uid && player.status=="user"){
             this.currentMatch.players.splice(index, 1);
         }
     });
@@ -95,10 +108,10 @@ export class MatchPage {
   }
 
   isPlayerJoined(){
-      let isPlayerJoined=false;   
+      let isPlayerJoined=false;
       if(this.currentMatch.players){ 
         this.currentMatch.players.forEach(player=>{
-          if(player.name==this.currentUser.email){
+          if(player.uid==this.currentUser.uid){
             isPlayerJoined = true;
           }
         });
@@ -116,13 +129,9 @@ export class MatchPage {
     this.data.update(this.matchId,{teams:this.currentMatch.teams});
   }
 
-  addPlayer(){
-    //todo
-  }
-
   removePlayer(pickedPlayer){
     this.currentMatch.players.forEach((player, index)=>{
-        if(pickedPlayer==player.name){
+        if(pickedPlayer==player.uid){
             this.currentMatch.players.splice(index, 1);
         }
     });

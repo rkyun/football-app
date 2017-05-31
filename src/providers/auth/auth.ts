@@ -22,8 +22,8 @@ export class AuthProvider {
   users: FirebaseListObservable<any>;
   user={
     id: null,
-    name: "Mietek",
-    number: "12"
+    name: null,
+    number: null
   };
 
   constructor(public http: Http, public afAuth: AngularFireAuth, public db: AngularFireDatabase ) {
@@ -46,11 +46,12 @@ export class AuthProvider {
     }))
   }
 
-  signUp(email,password){
+  signUp(email,password, name, number){
     this.afAuth.auth.createUserWithEmailAndPassword(email,password).then((response)=>{
       console.log('Registration completed')
       this.user.id=response.uid;
-      
+      this.user.name=name;
+      this.user.number=number;
       this.users.push(this.user).then(() => {
         console.log("custom user registration succes");
       });
@@ -70,8 +71,24 @@ export class AuthProvider {
     
   }
 
-  getUserByKey(key){
-    return this.db.object('/users/'+key);
+  getUserByKey(key):Promise<any> {
+    let good="";
+    let users=this.db.list('/users');
+    console.log(users);
+    return new Promise((resolve, reject) => {
+
+        users.forEach(user=>{
+      user.forEach(usr=>{
+      if(usr["id"]==key){
+        resolve(usr);  
+      }
+      });
+    })
+
+    });
+    
+   
+     
   }
 
   

@@ -50,24 +50,41 @@
     <div [ngSwitch]="matchInfo">
   <ion-list *ngSwitchCase="'players'">
     <div class="player-list">
-      <div class="player-item" *ngFor="let player of currentMatch.players" [ngClass]="{'selected' : player.name===pickedPlayer}" (click)="pickPlayer(player.name)">
-          <div class="number"><p>27</p></div>
+      <div class="player-item" *ngFor="let player of currentMatch.players" [ngClass]="{'selected' : player.uid===pickedPlayer}" (click)="pickPlayer(player.uid)">
+          <div class="number"><p>{{player.number}}</p></div>
           <div class="name"><p>{{player.name}}</p></div>
       </div>
       
     </div>
     {{currentUser.uid}}
     {{currentUserInfo?.id}}
+     {{currentUserInfo?.name}}
+
+     {{currentUserInfo}}
+    <div class="random-teams">
+      <div class="red">
+          <div class="player-item" *ngFor="let player of currentMatch.teams?.red" >
+              <div class="number"><p>{{player.number}}</p></div>
+              <div class="name"><p>{{player.name}}</p></div>
+          </div>
+      </div>
+       <div class="white">
+          <div class="player-item" *ngFor="let player of currentMatch.teams?.white" >
+              <div class="number"><p>{{player.number}}</p></div>
+              <div class="name"><p>{{player.name}}</p></div>
+          </div>
+      </div>
+    </div>
 
    <!--<div><span *ngFor="let player of currentMatch.players" [ngClass]="{'selected' : player.name===pickedPlayer}" (click)="pickPlayer(player.name)">{{player.name}} </span></div>
-<div>RED: <span *ngFor="let player of currentMatch.teams?.red" >{{player.name}} </span></div>
+<div>RED: </div>
 <div>WHITE: <span *ngFor="let player of currentMatch.teams?.white" >{{player.name}} </span></div>-->
 
-    <!--<button ion-button (click)="join()" [style.display]="!isPlayerJoined() ? 'block' : 'none'">Dołącz</button>
+    <button ion-button (click)="join()" [style.display]="!isPlayerJoined() ? 'block' : 'none'">Dołącz</button>
         <button ion-button (click)="leave()" [style.display]="isPlayerJoined() ? 'block' : 'none'">Wyjdz</button>
-    <button ion-button (click)="random()">Losuj</button>
+    <button ion-button [style.display]="currentMatch.players?.length > 0 ? 'block' : 'none'" (click)="random()">Losuj</button>
     
-    <button ion-button warning [style.display]="pickedPlayer ? 'block' : 'none'" (click)="removePlayer(pickedPlayer)">Usuń gracza</button>-->
+    <button ion-button warning [style.display]="pickedPlayer ? 'block' : 'none'" (click)="removePlayer(pickedPlayer)">Usuń gracza</button>
   <button ion-button (click)="showGuestModal()">Dodaj gracza</button>
   </ion-list>
 

@@ -1,3 +1,60 @@
 page-login {
+   .content{
+       background: url("../../assets/images/back.png") center center no-repeat;
+        background-size: cover;
+        padding: 0;
 
+        .scroll-content{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0 60px !important;
+
+            .logo{
+                    max-width: 150px;
+                    height: auto;
+                    margin-bottom: 50px;
+            }
+            .list{
+                width: 100%;
+
+                .item{
+                    margin: 20px 0;
+                    background: none;
+                    color: rgba(white,0.75);
+                    padding: 0;
+                    .item-inner{
+                        box-shadow: 0;
+                        border-bottom: 1px solid #dedede;
+                    }
+                    &.list-md{
+                    .item-input:last-child{
+                        border: none !important;
+                        
+                    }
+                    }
+                }
+            }
+
+            .options{
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                .login{
+                    width: 49%;
+                    background: #FE3E36
+                }
+                .sigin{
+                    width: 49%;
+                    background: none;
+                    outline: none;
+                    box-shadow: none;
+                }
+            }
+        }
+   }
+	
+	
 }
