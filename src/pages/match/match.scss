@@ -217,9 +217,266 @@ page-match {
 }
 
 .pitch {
-    position: relative;
-    display: block;
+    display: flex;
+    padding: 3%;
+    position: absolute;
     min-height: 100%;
-    min-width: 100%;
-    background: url('https://s.yimg.com/os/mit/media/m/sports/images/soccer-field-a0bf40e.png') center center;
+    width: 100%;
+    background: linear-gradient(
+        to bottom,
+        $darkGreen,
+        $darkGreen 10%,
+        $lightGreen 10%,
+        $lightGreen 20%,
+        $darkGreen 20%,
+        $darkGreen 30%,
+        $lightGreen 30%,
+        $lightGreen 40%,
+        $darkGreen 40%,
+        $darkGreen 50%,
+        $lightGreen 50%,
+        $lightGreen 60%,
+        $darkGreen 60%,
+        $darkGreen 70%,
+        $lightGreen 70%,
+        $lightGreen 80%,
+        $darkGreen 80%,
+        $darkGreen 90%,
+        $lightGreen 90% 
+        
+     
+    );
+
+    .field{
+       display: flex;
+       flex-direction: column;
+       align-items: flex-start;
+        position: relative;
+        min-height: 100%;
+        width: 100%;
+        border: 1px solid rgba(white, 0.85);
+        &:before{
+             position: absolute;
+                content: "";
+                width: 80px;
+                height: 30px;
+                border: 1px solid rgba(white, 0.85);
+                top: -1px;
+                left: calc(50% - 40px);
+        }
+
+         &:after{
+             position: absolute;
+                content: "";
+                width: 80px;
+                height: 30px;
+                border: 1px solid rgba(white, 0.85);
+                bottom: -1px;
+                left: calc(50% - 40px);
+        }
+
+        .half{
+            max-height: 50%;
+            width: 100%;
+            flex-grow: 1;
+            flex-wrap: wrap;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            &.white{
+                flex-wrap: wrap-reverse;
+                .player-item{
+                    .number{
+                        background: white;
+                        border: 3px solid #990B0B;
+                        line-height: 24px;
+                        p{
+                            color: #990B0B;
+                        }
+                    }
+                }
+            }
+
+
+            .player-item{
+                position: relative;
+                z-index: 2;
+                width: 25%;
+                padding: 5px 0;
+                margin-bottom: 10px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+    
+                    .number{
+                        width: 30px;
+                        height: 30px;
+                        background: #990B0B;
+                        border-radius: 50%;
+                        text-align: center;
+                        line-height: 30px;
+                        margin: 0;
+
+                        p{
+                            color: #eee;
+                            font-weight: 900;
+                            margin: 0;
+                        }
+                    }
+                    .name{
+                        p{
+                            margin: 0 5px;
+                            line-height: 30px;
+                            color: rgba(white, 1);
+                            text-shadow: 1px 0px black;
+                        }
+                    }
+                }
+            
+
+           
+            
+        }
+    }
+
+    &:before{
+        position: absolute;
+        content: "";
+        width: 94%;
+        height: 1px;
+        background: rgba(white, 0.85);
+        top: 50%;
+    }
+
+     &:after{
+        position: absolute;
+        content: "";
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        border: 1px solid rgba(white, 0.85);
+        top: calc(50% - 15px);
+        left: calc(50% - 15px);
+    }
+}
+
+.match-info-content{
+    position: relative;
+    height: 100%;
+
+}
+
+.players-tab{
+
+}
+
+
+.chat{
+    display: flex;
+    flex-direction: column-reverse;
+    .message-box{
+       
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 15px;
+        align-items: center;
+        .number{
+                        width: 30px;
+                        height: 30px;
+                        min-height: 30px;
+                        min-width: 30px;
+                        background: #990B0B;
+                        border-radius: 50%;
+                        text-align: center;
+                        line-height: 30px;
+                        margin: 0 20px 0 0;
+
+                        p{
+                            color: #eee;
+                            font-weight: 900;
+                            margin: 0;
+                        }
+                    }
+        .message-content{
+             position: relative;
+            padding: 5px 10px;
+            background: #f7e7e7;
+            border: 1px solid #eee;
+            border-radius: 10px;
+        .message-header{
+            color: #999;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            .author{
+                margin: 0;
+            }
+            .date{
+                margin: 0;
+            }
+        }
+        .text{
+            margin: 5px 0;
+            font-size: 16px;
+            position: relative;
+            z-index: 2;
+            color: #888;
+
+        }
+        &:after{
+            content: "";
+            width: 20px;
+            height: 20px;
+            background: #f7e7e7;
+            border-left: 1px solid #eee;
+            border-top: 1px solid #eee;
+
+            position: absolute;
+            top: 50%;
+            left: -11px;
+            transform: skewX(45deg);
+           
+
+        }
+        
+        }
+
+        &.self{
+            .number{
+                display: none;
+            }
+            .message-content{
+                margin-left: auto;
+                margin-right: 15px;
+            background: #FE3E36;
+
+            .message-header{
+                    color: rgba(white, 0.85);
+            }
+            .text{
+                color: rgba(white, 0.85);
+            }
+
+            &:before{
+                display: block;
+                content: "";
+                width: 20px;
+                height: 20px;
+                background: #FE3E36;
+                border-right: 1px solid #eee;
+                border-bottom: 1px solid #eee;
+
+                position: absolute;
+                top: 50%;
+                right: -11px;
+                transform: skewX(45deg);
+           
+            }
+            &:after{
+                display: none;
+            }
+            }
+        }
+    }
 }

@@ -47,21 +47,37 @@
 
 <ion-content padding>
   
-    <div [ngSwitch]="matchInfo">
-  <ion-list *ngSwitchCase="'players'">
-    <div class="player-list">
+    <div class="match-info-content" [ngSwitch]="matchInfo">
+  <div *ngSwitchCase="'players'" class="players-tab">
+    <!--<div class="player-list">
       <div class="player-item" *ngFor="let player of currentMatch.players" [ngClass]="{'selected' : player.uid===pickedPlayer}" (click)="pickPlayer(player.uid)">
           <div class="number"><p>{{player.number}}</p></div>
           <div class="name"><p>{{player.name}}</p></div>
           <button ion-button warning [style.display]="pickedPlayer && pickedPlayer==player.uid ? 'block' : 'none'" (click)="removePlayer(pickedPlayer)">Usuń</button>
       </div>
       
-    </div>
-<!--<div class="pitch" fixed>
-      <br>
-      <br>
-      <br><br><br><br><br><br><br><br><br>
     </div>-->
+
+  <div class="pitch" fixed>
+      <div class="field">
+        <div class="half red">
+          <div class="player-item" *ngFor="let player of currentMatch.teams?.red"  [style.width]="currentMatch.teams?.red.length > 6 ? '25%' : '33%'" >
+              <div class="number"><p>{{player.number}}</p></div>
+              <div class="name"><p>{{player.name}}</p></div>
+          </div>
+         
+        </div>
+        <div class="half white">
+          <div class="player-item" *ngFor="let player of currentMatch.teams?.white"  [style.width]="currentMatch.teams?.white.length > 6 ? '25%' : '33%'" >
+              <div class="number"><p>{{player.number}}</p></div>
+              <div class="name"><p>{{player.name}}</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
     
     <!--{{currentUser.uid}}
     {{currentUserInfo?.id}}
@@ -91,12 +107,111 @@
     
 
     
-  </ion-list>
+  </div>
 
-  <ion-list *ngSwitchCase="'chat'">
-    czat
+  <div *ngSwitchCase="'chat'" class="chat"> <div class="message-box">
+      <div class="number">
+        <p>27</p>
+      </div>
+      <div class="message-content">
+        <div class="message-header">
+          <p class="author">Misiek5</p>
+          <p class="date">14:35</p>
+        </div>
+        <p class="text">Siema Janusz, co tam słychac???</p>
+      </div>
+    </div>
 
-  </ion-list>
+    <div class="message-box self">
+      <div class="number">
+        <p>27</p>
+      </div>
+      <div class="message-content">
+        <div class="message-header">
+          <p class="author">Misiek4</p>
+          <p class="date">14:35</p>
+        </div>
+        <p class="text">Siema Janusz, co tam słychac??? GONO HEHEHE KRUWA HJEHEH POQWJEPQ</p>
+      </div>
+    </div>
+
+    <div class="message-box">
+      <div class="number">
+        <p>27</p>
+      </div>
+      <div class="message-content">
+        <div class="message-header">
+          <p class="author">Misiek3</p>
+          <p class="date">14:35</p>
+        </div>
+        <p class="text">Siema Janusz, co tam słychac???</p>
+      </div>
+    </div>
+
+    <div class="message-box">
+      <div class="number">
+        <p>27</p>
+      </div>
+      <div class="message-content">
+        <div class="message-header">
+          <p class="author">Misiek</p>
+          <p class="date">14:35</p>
+        </div>
+        <p class="text">Siema Janusz, co tam słychac??? Robie se tera czat i jest niezle, w tle leci jakis odlsculowy hip hop heheheh :)</p>
+      </div>
+    </div>
+    <div class="message-box">
+      <div class="number">
+        <p>27</p>
+      </div>
+      <div class="message-content">
+        <div class="message-header">
+          <p class="author">Misiek</p>
+          <p class="date">14:35</p>
+        </div>
+        <p class="text">Siema Janusz, co tam słychac???</p>
+      </div>
+    </div>
+
+    <div class="message-box self">
+      <div class="number">
+        <p>27</p>
+      </div>
+      <div class="message-content">
+        <div class="message-header">
+          <p class="author">Misiek</p>
+          <p class="date">14:35</p>
+        </div>
+        <p class="text">Siema Janusz, co tam słychac??? GONO HEHEHE KRUWA HJEHEH POQWJEPQ</p>
+      </div>
+    </div>
+
+    <div class="message-box">
+      <div class="number">
+        <p>27</p>
+      </div>
+      <div class="message-content">
+        <div class="message-header">
+          <p class="author">Misiek</p>
+          <p class="date">14:35</p>
+        </div>
+        <p class="text">Siema Janusz, co tam słychac???</p>
+      </div>
+    </div>
+
+    <div class="message-box">
+      <div class="number">
+        <p>27</p>
+      </div>
+      <div class="message-content">
+        <div class="message-header">
+          <p class="author">Misiek</p>
+          <p class="date">14:35</p>
+        </div>
+        <p class="text">Siema Janusz, co tam słychac??? Robie se tera czat i jest niezle, w tle leci jakis odlsculowy hip hop heheheh :)</p>
+      </div>
+    </div>
+  </div>
 </div>
 
 
