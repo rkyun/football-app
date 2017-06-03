@@ -70,3 +70,15 @@ body, span, button, h1, h2, h3, h4, h5, h6, p, ion-item, ion-title{
 .item-md.item-input.input-has-focus:last-child{
     box-shadow: none;
 }
+
+.footer{
+    background: #AF1111;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    .button{
+        flex-grow: 1;
+        opacity: 0.8;
+        //background: orange;
+    }
+}

@@ -53,15 +53,22 @@
       <div class="player-item" *ngFor="let player of currentMatch.players" [ngClass]="{'selected' : player.uid===pickedPlayer}" (click)="pickPlayer(player.uid)">
           <div class="number"><p>{{player.number}}</p></div>
           <div class="name"><p>{{player.name}}</p></div>
+          <button ion-button warning [style.display]="pickedPlayer && pickedPlayer==player.uid ? 'block' : 'none'" (click)="removePlayer(pickedPlayer)">Usuń</button>
       </div>
       
     </div>
-    {{currentUser.uid}}
+<!--<div class="pitch" fixed>
+      <br>
+      <br>
+      <br><br><br><br><br><br><br><br><br>
+    </div>-->
+    
+    <!--{{currentUser.uid}}
     {{currentUserInfo?.id}}
      {{currentUserInfo?.name}}
 
-     {{currentUserInfo}}
-    <div class="random-teams">
+     {{currentUserInfo}}-->
+    <!--<div class="random-teams">
       <div class="red">
           <div class="player-item" *ngFor="let player of currentMatch.teams?.red" >
               <div class="number"><p>{{player.number}}</p></div>
@@ -74,25 +81,35 @@
               <div class="name"><p>{{player.name}}</p></div>
           </div>
       </div>
-    </div>
+    </div>-->
 
    <!--<div><span *ngFor="let player of currentMatch.players" [ngClass]="{'selected' : player.name===pickedPlayer}" (click)="pickPlayer(player.name)">{{player.name}} </span></div>
 <div>RED: </div>
 <div>WHITE: <span *ngFor="let player of currentMatch.teams?.white" >{{player.name}} </span></div>-->
 
-    <button ion-button (click)="join()" [style.display]="!isPlayerJoined() ? 'block' : 'none'">Dołącz</button>
-        <button ion-button (click)="leave()" [style.display]="isPlayerJoined() ? 'block' : 'none'">Wyjdz</button>
-    <button ion-button [style.display]="currentMatch.players?.length > 0 ? 'block' : 'none'" (click)="random()">Losuj</button>
+
     
-    <button ion-button warning [style.display]="pickedPlayer ? 'block' : 'none'" (click)="removePlayer(pickedPlayer)">Usuń gracza</button>
-  <button ion-button (click)="showGuestModal()">Dodaj gracza</button>
+
+    
   </ion-list>
 
   <ion-list *ngSwitchCase="'chat'">
     czat
+
   </ion-list>
 </div>
 
 
 
 </ion-content>
+
+<ion-footer>
+<button ion-button (click)="join()" [style.display]="!isPlayerJoined() ? 'block' : 'none'">Dołącz</button>
+        <button ion-button (click)="leave()" [style.display]="isPlayerJoined() ? 'block' : 'none'">Wyjdz</button>
+    <button ion-button [style.display]="currentMatch.players?.length > 0 ? 'block' : 'none'" (click)="random()">Losuj</button>
+    
+    
+  <button ion-button (click)="showGuestModal()">Dodaj gracza</button>
+</ion-footer>
+
+

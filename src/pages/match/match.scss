@@ -118,13 +118,16 @@ page-match {
    flex-direction: row;
    flex-wrap: wrap;
     .player-item{
-        justify-content: center;
-        width: 50%;
-         border-bottom: 1px solid #eee;
-         padding: 5px 0;
-        margin-bottom: 10px;
+        background: white;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+         border-bottom: 1px solid #efefef;
+         padding: 15px 0;
+        
         display: flex;
         flex-direction: row;
+        
         .number{
             width: 30px;
             height: 30px;
@@ -132,7 +135,8 @@ page-match {
             border-radius: 50%;
             text-align: center;
             line-height: 30px;
-            margin: 0;
+            margin: 0 5px;
+            box-shadow: 0px 0px 2px 2px #eee;
 
             p{
                 color: white;
@@ -144,8 +148,27 @@ page-match {
             p{
                 margin: 0 5px;
                 line-height: 30px;
+                font-size: 16px;
+                color: #666;
             }
         }
+        button{
+            margin: 0;
+            margin-right: 20px;
+            margin-left: auto;
+            font-size: 16px;
+            height: 26px;
+        }
+
+        &.selected{
+            background: wheat !important;
+            
+        }
+
+        &:nth-child(even){
+            background: whitesmoke;
+        }
+
     }
 }
 
@@ -191,4 +214,12 @@ page-match {
             }
         }
     }
+}
+
+.pitch {
+    position: relative;
+    display: block;
+    min-height: 100%;
+    min-width: 100%;
+    background: url('https://s.yimg.com/os/mit/media/m/sports/images/soccer-field-a0bf40e.png') center center;
 }
