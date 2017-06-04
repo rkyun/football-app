@@ -76,9 +76,30 @@ body, span, button, h1, h2, h3, h4, h5, h6, p, ion-item, ion-title{
     display: flex;
     flex-direction: row;
     justify-content: center;
+    .options{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
     .button{
         flex-grow: 1;
         opacity: 0.8;
         //background: orange;
+        
+        &.send-button{
+            max-width: 20%;
+        }
     }
+    .chat-input{
+        color: rgba(white, 0.85);
+    }
+
+    }
+    
+}
+
+
+.item-md.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner {
+    border-bottom-color: white;
+    box-shadow: inset 0 -1px 0 0 white;
 }

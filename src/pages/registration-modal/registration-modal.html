@@ -11,22 +11,25 @@
 <ion-list>
 
   <ion-item>
-    <ion-label floating>Email</ion-label>
-    <ion-input type="text" name="email" [(ngModel)]="email"></ion-input>
+   
+    <ion-input type="text" name="nick" [(ngModel)]="name" placeholder="Nick"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-input type="text" name="email" [(ngModel)]="email" placeholder="E-mail"></ion-input>
+  </ion-item>
+  
+  <ion-item>
+   
+    <ion-input type="password" name="password" [(ngModel)]="password" placeholder="Hasło"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-label floating>Nick</ion-label>
-    <ion-input type="text" name="email" [(ngModel)]="name"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label floating>Hasło</ion-label>
-    <ion-input type="password" name="password" [(ngModel)]="password"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label floating>Numer</ion-label>
-    <ion-input type="text" name="email" [(ngModel)]="number"></ion-input>
+    
+    <ion-input type="text" name="number" [(ngModel)]="number" placeholder="Numer na koszulce"></ion-input>
   </ion-item>
 
 </ion-list>
-<button block ion-button (click)="submit()">Zarejestruj się</button>
+<div class="options">
+  <button class="login" ion-button (click)="submit()">Zarejestruj</button>
+</div>
 </ion-content>

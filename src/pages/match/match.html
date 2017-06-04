@@ -15,7 +15,7 @@
   <div class="match-info">
     <div class="top">
      <p><i class="fa fa-futbol-o"></i>{{currentMatch.type}}</p>
-     <p><i class="fa fa-clock-o"></i>{{currentMatch.timestamp*1000 |date:' hh:mm'}}</p>
+     <p><i class="fa fa-clock-o"></i>{{currentMatch.timestamp*1000 |date:' HH:mm'}}</p>
    </div>
    <div class="middle">
      <p class="team">Red</p>
@@ -23,7 +23,7 @@
      <p class="team">White</p>
    </div>
    <div class="bottom">
-     <p><i class="fa fa-calendar"></i>{{currentMatch.timestamp*1000 |date:'MMM d'}}</p>
+     <p><i class="fa fa-calendar"></i>{{currentMatch.timestamp*1000 |date:'d MMMM'}}</p>
      <p><i class="fa fa-thermometer-half" aria-hidden="true"></i>{{currentMatch.weather}}</p>
      <p><i class="fa fa-map-marker"></i>{{stadium?.name}}</p>
    </div>
@@ -49,16 +49,16 @@
   
     <div class="match-info-content" [ngSwitch]="matchInfo">
   <div *ngSwitchCase="'players'" class="players-tab">
-    <!--<div class="player-list">
+    <div class="player-list" [style.display]="currentMatch.status == 'Planowany' ? 'block' : 'none'">
       <div class="player-item" *ngFor="let player of currentMatch.players" [ngClass]="{'selected' : player.uid===pickedPlayer}" (click)="pickPlayer(player.uid)">
           <div class="number"><p>{{player.number}}</p></div>
           <div class="name"><p>{{player.name}}</p></div>
           <button ion-button warning [style.display]="pickedPlayer && pickedPlayer==player.uid ? 'block' : 'none'" (click)="removePlayer(pickedPlayer)">Usuń</button>
       </div>
       
-    </div>-->
+    </div>
 
-  <div class="pitch" fixed>
+  <div class="pitch" fixed  [style.display]="currentMatch.status == 'Wylosowane' ? 'flex' : 'none'">
       <div class="field">
         <div class="half red">
           <div class="player-item" *ngFor="let player of currentMatch.teams?.red"  [style.width]="currentMatch.teams?.red.length > 6 ? '25%' : '33%'" >
@@ -109,108 +109,23 @@
     
   </div>
 
-  <div *ngSwitchCase="'chat'" class="chat"> <div class="message-box">
+  <div *ngSwitchCase="'chat'" class="chat" >
+
+     <p class="message-info" [style.display]="currentMatch.chat && currentMatch.chat[0] ? 'none' : 'block'">Wygląda na to, że nikt jeszcze nic nie napisał. Przywitaj się!</p>
+     <div class="message-box" *ngFor="let message of currentMatch.chat"  [ngClass]="{'self': message.uid==currentUser.uid }">
       <div class="number">
-        <p>27</p>
+        <p>{{message.number}}</p>
       </div>
       <div class="message-content">
         <div class="message-header">
-          <p class="author">Misiek5</p>
-          <p class="date">14:35</p>
+          <p class="author">{{message.name}}</p>
+          <p class="date"><span [style.display]="isSameDate(message.time) ? 'none' : 'block'" >{{message.time|date:'EEEE'}}</span> {{message.time|date:'HH:mm'}}</p>
         </div>
-        <p class="text">Siema Janusz, co tam słychac???</p>
+        <p class="text">{{message.text}}</p>
       </div>
     </div>
 
-    <div class="message-box self">
-      <div class="number">
-        <p>27</p>
-      </div>
-      <div class="message-content">
-        <div class="message-header">
-          <p class="author">Misiek4</p>
-          <p class="date">14:35</p>
-        </div>
-        <p class="text">Siema Janusz, co tam słychac??? GONO HEHEHE KRUWA HJEHEH POQWJEPQ</p>
-      </div>
-    </div>
-
-    <div class="message-box">
-      <div class="number">
-        <p>27</p>
-      </div>
-      <div class="message-content">
-        <div class="message-header">
-          <p class="author">Misiek3</p>
-          <p class="date">14:35</p>
-        </div>
-        <p class="text">Siema Janusz, co tam słychac???</p>
-      </div>
-    </div>
-
-    <div class="message-box">
-      <div class="number">
-        <p>27</p>
-      </div>
-      <div class="message-content">
-        <div class="message-header">
-          <p class="author">Misiek</p>
-          <p class="date">14:35</p>
-        </div>
-        <p class="text">Siema Janusz, co tam słychac??? Robie se tera czat i jest niezle, w tle leci jakis odlsculowy hip hop heheheh :)</p>
-      </div>
-    </div>
-    <div class="message-box">
-      <div class="number">
-        <p>27</p>
-      </div>
-      <div class="message-content">
-        <div class="message-header">
-          <p class="author">Misiek</p>
-          <p class="date">14:35</p>
-        </div>
-        <p class="text">Siema Janusz, co tam słychac???</p>
-      </div>
-    </div>
-
-    <div class="message-box self">
-      <div class="number">
-        <p>27</p>
-      </div>
-      <div class="message-content">
-        <div class="message-header">
-          <p class="author">Misiek</p>
-          <p class="date">14:35</p>
-        </div>
-        <p class="text">Siema Janusz, co tam słychac??? GONO HEHEHE KRUWA HJEHEH POQWJEPQ</p>
-      </div>
-    </div>
-
-    <div class="message-box">
-      <div class="number">
-        <p>27</p>
-      </div>
-      <div class="message-content">
-        <div class="message-header">
-          <p class="author">Misiek</p>
-          <p class="date">14:35</p>
-        </div>
-        <p class="text">Siema Janusz, co tam słychac???</p>
-      </div>
-    </div>
-
-    <div class="message-box">
-      <div class="number">
-        <p>27</p>
-      </div>
-      <div class="message-content">
-        <div class="message-header">
-          <p class="author">Misiek</p>
-          <p class="date">14:35</p>
-        </div>
-        <p class="text">Siema Janusz, co tam słychac??? Robie se tera czat i jest niezle, w tle leci jakis odlsculowy hip hop heheheh :)</p>
-      </div>
-    </div>
+    
   </div>
 </div>
 
@@ -218,13 +133,21 @@
 
 </ion-content>
 
-<ion-footer>
-<button ion-button (click)="join()" [style.display]="!isPlayerJoined() ? 'block' : 'none'">Dołącz</button>
-        <button ion-button (click)="leave()" [style.display]="isPlayerJoined() ? 'block' : 'none'">Wyjdz</button>
-    <button ion-button [style.display]="currentMatch.players?.length > 0 ? 'block' : 'none'" (click)="random()">Losuj</button>
-    
-    
-  <button ion-button (click)="showGuestModal()">Dodaj gracza</button>
+<ion-footer [ngSwitch]="matchInfo">
+  <div class="options" *ngSwitchCase="'players'">
+        <button ion-button (click)="join()" [style.display]="!isPlayerJoined() && currentMatch.status=='Planowany' ? 'block' : 'none'">Dołącz</button>
+        <button ion-button (click)="leave()" [style.display]="isPlayerJoined() && currentMatch.status=='Planowany' ? 'block' : 'none'">Wyjdz</button>
+        <button ion-button [style.display]="currentMatch.players?.length > 0 ? 'block' : 'none'" (click)="random()">Losuj</button>
+        <button ion-button (click)="showGuestModal()" [style.display]="currentMatch.status=='Planowany' ? 'block' : 'none'">Dodaj gracza</button>
+        <button ion-button (click)="cancelTeams()" [style.display]="currentMatch.status=='Wylosowane' ? 'block' : 'none'">Anuluj drużyny</button>
+
+  </div>
+
+<div class="options" *ngSwitchCase="'chat'">
+        <ion-input placeholder="Napisz wiadomość" class="chat-input" [(ngModel)]="messageText"></ion-input>
+        <button ion-button (click)="sendMessage()" class="send-button">Wyślij</button>
+    </div>
+  
 </ion-footer>
 
 

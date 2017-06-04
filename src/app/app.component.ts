@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,LOCALE_ID } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -8,7 +8,9 @@ import { AngularFireAuth } from 'angularfire2/auth';
 
 @Component({
   templateUrl: 'app.html',
-  providers: [AngularFireAuth]
+  providers: [
+    { provide: LOCALE_ID, useValue: "pl-PL" },
+    AngularFireAuth]
   
 })
 export class MyApp {

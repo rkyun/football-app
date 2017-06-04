@@ -37,6 +37,8 @@ export class GuestModal {
       this.match.players=[player];
       this.data.update(this.matchId,{players: this.match.players});
     }
+    this.name="";
+    this.navCtrl.pop();
   }
 
   

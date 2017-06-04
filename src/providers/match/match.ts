@@ -13,6 +13,7 @@ import { AngularFireDatabase, FirebaseListObservable} from 'angularfire2/databas
 @Injectable()
 export class MatchProvider {
 matches: FirebaseListObservable<any>;
+
 match={
     date: Date,
     stadiumId: String,
@@ -28,14 +29,29 @@ match={
       red: Number,
       white: Number,
       winner: String
-    }
+    },
+    chat: []
+    
   };
+
+
+
+
+  
+
   constructor(public http: Http, public db: AngularFireDatabase) {
     console.log('Hello MatchService Provider');
     this.matches = db.list('/matches');
+   
   }
 
+  
+  // db.database().ref('registered').on('value', snapshot => {
+  //   console.log('changed');
+  // })
+
   init(){
+    
     this.matches.push({
       date: new Date().toISOString(),
       location: "WB",
@@ -88,5 +104,15 @@ getWeather(lang,long): Observable<any>{
   return this.http.get(`http://api.openweathermap.org/data/2.5/forecast?lat=${lang}&lon=${long}&appid=e81bf78a7952363f796415666970a605&units=metric`)
   .map(response => response.json());
 }
+
+listen(key) {
+
+  return this.db.database.ref('matches/'+key);
+
+
+}
+
+
+
 
 }

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, ModalController, Content } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseObjectObservable} from 'angularfire2/database';
 
 import { GuestModal } from '../guest-modal/guest-modal';
@@ -7,6 +7,7 @@ import { GuestModal } from '../guest-modal/guest-modal';
 import { AuthProvider} from '../../providers/auth/auth';
 import { MatchProvider} from '../../providers/match/match';
 import {StadiumProvider} from '../../providers/stadium/stadium';
+
 
 /**
  * Generated class for the Match page.
@@ -21,6 +22,8 @@ import {StadiumProvider} from '../../providers/stadium/stadium';
   providers: [AngularFireDatabase, AuthProvider, MatchProvider, StadiumProvider]
 })
 export class MatchPage {
+  
+  @ViewChild(Content) content: Content;
   matchId: String;
   stadiumId: String;
   currentUser: any;
@@ -32,20 +35,29 @@ export class MatchPage {
   matchInfo: any;
   user: any;
   currentUserInfo: any;
+  messageText: any;
+  listener: any;
+  ref: any
+  today: any;
   
   constructor(public navCtrl: NavController, public navParams: NavParams, public auth: AuthProvider, public data: MatchProvider, public stadiumProvider: StadiumProvider, public modalCtrl: ModalController, ) {
+        
+      
+      
+        this.today=new Date().getDate();
+        
         this.matchInfo='players';
         this.matchId=navParams.get('key');
         this.stadiumId=navParams.get('stadiumId');
         this.match=this.data.getMatchByKey(this.matchId);
-   
+        this.ref=this.data.listen(this.matchId);
         this.match.forEach(element => {
             this.currentMatch= element;
           });
 
         this.stadiumProvider.getStadiumByKey(this.stadiumId).forEach(element=>{
             this.stadium= element;
-          })
+          });
     
         this.currentUser = auth.getCurrentUser();
         console.log(this.currentUser.uid, 'userid');
@@ -66,6 +78,8 @@ export class MatchPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad Match');
+
+    
    
       setTimeout(()=>{
         console.log(this.stadium, "Wybrany stadion");
@@ -80,7 +94,20 @@ export class MatchPage {
   }
 
   ionViewDidEnter(){
+     let ref=
+     this.listener = this.ref.on('value', snapshot =>{
+        if(this.matchInfo=='chat'){
+              setTimeout(()=>{
+          this.content.scrollToBottom(0);
+        }, 150)
+        }
+      });
+    console.log(this.listener, "siema");
      
+  }
+  ionViewDidLeave(){
+    this.ref.off('value', this.listener)
+    console.log(this.listener, "leave");
   }
 
   getMatch(){
@@ -126,7 +153,7 @@ export class MatchPage {
     this.currentMatch.teams["white"]=teams[1];
    
     console.log(this.currentMatch);
-    this.data.update(this.matchId,{teams:this.currentMatch.teams});
+    this.data.update(this.matchId,{status:"Wylosowane",teams:this.currentMatch.teams});
   }
 
   removePlayer(pickedPlayer){
@@ -185,6 +212,42 @@ export class MatchPage {
     this.currentMatch.weather="-"
     
   }
+}
+
+    sendMessage(){
+      
+      let message = {uid:this.currentUser.uid,time:new Date().toISOString(),text:this.messageText,number:this.currentUserInfo.number, name: this.currentUserInfo.name};
+    if (this.currentMatch.chat){
+      this.currentMatch.chat.push(message);
+      this.data.update(this.matchId,{chat:this.currentMatch.chat});
+    } else{
+      this.currentMatch.chat=[message];
+      this.data.update(this.matchId,{chat: this.currentMatch.chat});
+    }
+
+    this.messageText="";
+    
+    
   }
+
+
+  isSameDate(date){
+   
+    let _date=new Date(date).getDate();
+
+    if(this.today==_date){
+      return true;
+    } else{
+      return false;
+    }
+  
+  
+  }
+
+  cancelTeams(){
+    this.data.update(this.matchId, {status: "Planowany", teams: {}});
+  }
+  
+ 
 
 }
