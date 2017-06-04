@@ -8,6 +8,8 @@ import { MatchProvider} from '../../providers/match/match';
 import { AuthProvider} from '../../providers/auth/auth';
 import { AddStadiumPage} from '../add-stadium/add-stadium';
 import { StadiumProvider } from '../../providers/stadium/stadium';
+import { SettingsPage } from '../settings/settings';
+
 
 
 
@@ -72,18 +74,18 @@ export class HomePage {
     this.navCtrl.push(AddMatchPage);
   }
 
-  goToAddStadiumPage(){
-    this.navCtrl.push(AddStadiumPage);
-  }
-
   goToMatchPage(match, key, stadiumId){
     this.navCtrl.push(MatchPage,{'match':match, 'key': key, 'stadiumId': stadiumId});
     
   }
 
-  signOut(){
-    this.auth.signOut();
+  goToSettings(){
+    this.navCtrl.push(SettingsPage);
   }
+  goToHome(){
+    this.navCtrl.push(HomePage);
+  }
+
 
   getStadium(stadiumId){
       return this.stad.getStadiumByKey(stadiumId);

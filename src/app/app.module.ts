@@ -12,6 +12,7 @@ import { AddMatchPage } from '../pages/add-match/add-match';
 import { RegistrationModalPage} from '../pages/registration-modal/registration-modal';
 import { GuestModal} from '../pages/guest-modal/guest-modal';
 import { AddStadiumPage} from '../pages/add-stadium/add-stadium';
+import { SettingsPage } from '../pages/settings/settings';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -49,7 +50,8 @@ export const firebaseConfig = {
     MatchPage,
     RegistrationModalPage,
     GuestModal,
-    AddStadiumPage
+    AddStadiumPage,
+    SettingsPage
   ],
   imports: [
     BrowserModule,
@@ -68,7 +70,8 @@ export const firebaseConfig = {
     MatchPage,
     RegistrationModalPage,
     GuestModal,
-    AddStadiumPage
+    AddStadiumPage,
+    SettingsPage
     
   ],
   providers: [

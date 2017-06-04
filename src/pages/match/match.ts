@@ -3,10 +3,14 @@ import { IonicPage, NavController, NavParams, ModalController, Content } from 'i
 import { AngularFireDatabase, FirebaseObjectObservable} from 'angularfire2/database';
 
 import { GuestModal } from '../guest-modal/guest-modal';
+import { SettingsPage } from '../settings/settings';
+import { HomePage } from '../home/home';
 
 import { AuthProvider} from '../../providers/auth/auth';
 import { MatchProvider} from '../../providers/match/match';
 import {StadiumProvider} from '../../providers/stadium/stadium';
+
+
 
 
 /**
@@ -108,6 +112,13 @@ export class MatchPage {
   ionViewDidLeave(){
     this.ref.off('value', this.listener)
     console.log(this.listener, "leave");
+  }
+
+  goToSettings(){
+    this.navCtrl.push(SettingsPage);
+  }
+  goToHome(){
+    this.navCtrl.push(HomePage);
   }
 
   getMatch(){

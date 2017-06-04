@@ -1,0 +1,35 @@
+<!--
+  Generated template for the SettingsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>Ustawienia</ion-title>
+  </ion-navbar>
+  <button class="nav-button" (click)="goToHome()"><i class="fa fa-home"></i></button>
+  <button class="nav-button" (click)="goToSettings()"><i class="fa fa-cog"></i></button>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+  <ion-item (click)="goToAddStadiumPage()">
+    
+      Dodaj stadion
+    <ion-icon name="add-circle" item-right></ion-icon>
+  </ion-item>
+
+   <ion-item>
+  
+      Ustawienia Konta
+    <ion-icon name="person" item-right></ion-icon>
+  </ion-item>
+
+   <ion-item  (click)="signOut()">
+      Wyloguj
+    <ion-icon name="log-out" item-right></ion-icon>
+  </ion-item>
+</ion-list>
+</ion-content>

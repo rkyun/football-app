@@ -4,6 +4,7 @@ import { AngularFireDatabase, FirebaseListObservable} from 'angularfire2/databas
 import { MatchProvider} from '../../providers/match/match';
 import {StadiumProvider} from '../../providers/stadium/stadium';
 import { HomePage } from '../home/home';
+import { SettingsPage } from '../settings/settings';
 /**
  * Generated class for the AddMatchPage page.
  *
@@ -52,6 +53,13 @@ export class AddMatchPage {
     console.log('ionViewDidLoad AddMatchPage');
     console.log('SIEMA');
   }
+
+  goToSettings(){
+    this.navCtrl.push(SettingsPage);
+  }
+  goToHome(){
+    this.navCtrl.push(HomePage);
+  }
  
   submit(){
     this.match.timestamp=Math.floor(Date.parse(new Date(this.match.date + ' ' + this.match.time).toUTCString())/ 1000);
@@ -64,6 +72,8 @@ export class AddMatchPage {
   getStadiums(){
 
   }
+
+  
   
 
 }
