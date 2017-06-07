@@ -160,8 +160,13 @@ export class MatchPage {
   random(){
     let teams = this.data.randomizeTeam(this.currentMatch.players.slice());
     this.currentMatch.teams={};
-    this.currentMatch.teams["red"]=teams[0];
-    this.currentMatch.teams["white"]=teams[1];
+    this.currentMatch.teams.red={};
+    this.currentMatch.teams.white={};
+    this.currentMatch.teams.red["players"]=teams[0];
+    this.currentMatch.teams.red["captain"]=teams[0][0]
+    this.currentMatch.teams.white["players"]=teams[1];
+    this.currentMatch.teams.white["captain"]=teams[1][0];
+
    
     console.log(this.currentMatch);
     this.data.update(this.matchId,{status:"Wylosowane",teams:this.currentMatch.teams});

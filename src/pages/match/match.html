@@ -18,9 +18,9 @@
      <p><i class="fa fa-clock-o"></i>{{currentMatch.timestamp*1000 |date:' HH:mm'}}</p>
    </div>
    <div class="middle">
-     <p class="team">Red</p>
+     <p class="team"><span *ngIf="currentMatch.teams?.red?.captain.name">{{currentMatch.teams?.red?.captain?.name }} Team </span> <span *ngIf="!currentMatch.teams?.red?.captain.name">Red</span> </p>
      <p class="versus">VS</p>
-     <p class="team">White</p>
+     <p class="team"><span *ngIf="currentMatch.teams?.white?.captain.name">{{currentMatch.teams?.white?.captain?.name }} Team </span> <span *ngIf="!currentMatch.teams?.white?.captain.name">White</span> </p>
    </div>
    <div class="bottom">
      <p><i class="fa fa-calendar"></i>{{currentMatch.timestamp*1000 |date:'d MMMM'}}</p>
@@ -61,14 +61,14 @@
   <div class="pitch" fixed  [style.display]="currentMatch.status == 'Wylosowane' ? 'flex' : 'none'">
       <div class="field">
         <div class="half red">
-          <div class="player-item" *ngFor="let player of currentMatch.teams?.red"  [style.width]="currentMatch.teams?.red.length > 6 ? '25%' : '33%'" >
+          <div class="player-item" *ngFor="let player of currentMatch.teams?.red?.players"  [style.width]="currentMatch.teams?.red.length > 6 ? '25%' : '33%'" >
               <div class="number"><p>{{player.number}}</p></div>
               <div class="name"><p>{{player.name}}</p></div>
           </div>
          
         </div>
         <div class="half white">
-          <div class="player-item" *ngFor="let player of currentMatch.teams?.white"  [style.width]="currentMatch.teams?.white.length > 6 ? '25%' : '33%'" >
+          <div class="player-item" *ngFor="let player of currentMatch.teams?.white?.players"  [style.width]="currentMatch.teams?.white.length > 6 ? '25%' : '33%'" >
               <div class="number"><p>{{player.number}}</p></div>
               <div class="name"><p>{{player.name}}</p></div>
           </div>
