@@ -63,14 +63,14 @@
         <div class="half red">
           <div class="player-item" *ngFor="let player of currentMatch.teams?.red?.players"  [style.width]="currentMatch.teams?.red.length > 6 ? '25%' : '33%'" >
               <div class="number"><p>{{player.number}}</p></div>
-              <div class="name"><p>{{player.name}}</p></div>
+              <div class="name"><p [style.color]="player.name==currentMatch.teams?.red?.captain.name ? 'yellow' : 'white'">{{player.name}}</p></div>
           </div>
          
         </div>
         <div class="half white">
           <div class="player-item" *ngFor="let player of currentMatch.teams?.white?.players"  [style.width]="currentMatch.teams?.white.length > 6 ? '25%' : '33%'" >
               <div class="number"><p>{{player.number}}</p></div>
-              <div class="name"><p>{{player.name}}</p></div>
+              <div class="name"><p [style.color]="player.name==currentMatch.teams?.white?.captain.name ? 'yellow' : 'white'">{{player.name}}</p></div>
           </div>
         </div>
       </div>

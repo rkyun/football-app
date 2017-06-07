@@ -98,7 +98,6 @@ export class MatchPage {
   }
 
   ionViewDidEnter(){
-     let ref=
      this.listener = this.ref.on('value', snapshot =>{
         if(this.matchInfo=='chat'){
               setTimeout(()=>{
@@ -163,9 +162,9 @@ export class MatchPage {
     this.currentMatch.teams.red={};
     this.currentMatch.teams.white={};
     this.currentMatch.teams.red["players"]=teams[0];
-    this.currentMatch.teams.red["captain"]=teams[0][0]
+    this.currentMatch.teams.red["captain"]=teams[0][Math.floor(Math.random()*teams[0].length)];
     this.currentMatch.teams.white["players"]=teams[1];
-    this.currentMatch.teams.white["captain"]=teams[1][0];
+    this.currentMatch.teams.white["captain"]=teams[1][Math.floor(Math.random()*teams[1].length)];
 
    
     console.log(this.currentMatch);
