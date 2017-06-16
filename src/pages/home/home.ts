@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { LoginPage } from '../login/login';
 import { MatchPage } from '../match/match';
 import { AddMatchPage } from '../add-match/add-match';
-import { MatchProvider} from '../../providers/match/match';
-import { AuthProvider} from '../../providers/auth/auth';
-import { AddStadiumPage} from '../add-stadium/add-stadium';
+import { MatchProvider } from '../../providers/match/match';
+import { AuthProvider } from '../../providers/auth/auth';
+import { AddStadiumPage } from '../add-stadium/add-stadium';
 import { StadiumProvider } from '../../providers/stadium/stadium';
 import { SettingsPage } from '../settings/settings';
 
@@ -16,11 +16,11 @@ import { SettingsPage } from '../settings/settings';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
-  providers: [AngularFireDatabase, MatchProvider, AuthProvider, StadiumProvider ]
+  providers: [AngularFireDatabase, MatchProvider, AuthProvider, StadiumProvider]
 })
 export class HomePage {
   matches: any;
-  match={
+  match = {
     date: Date,
     location: String,
     weather: String,
@@ -28,73 +28,60 @@ export class HomePage {
     players: [],
     teams: {
       red: {},
-      white:{}
+      white: {}
     },
     status: String,
-    result:{
+    result: {
       red: Number,
       white: Number,
       winner: String
     }
   };
-  stadions=[];
- 
+  stadions = [];
 
-  
+
+
 
   constructor(public navCtrl: NavController, public data: MatchProvider, public stad: StadiumProvider, public auth: AuthProvider) {
-   this.matches = data.get()
-   this.matches.location={};
-   this.matches.forEach((element,i) => {   
-     element.forEach((el,index)=>{
-       this.getStadium(el.stadiumId).forEach(e=>
-       {
-            this.stadions.push(e);
-            console.log(e);
-   
-       });
-       
-     })
-    
-   });
+    this.matches = data.get()
+    this.matches.location = {};
+    this.matches.forEach((element, i) => {
+      element.forEach((el, index) => {
+        this.getStadium(el.stadiumId).forEach(e => {
+          this.stadions.push(e);
+          console.log(e);
 
+        });
 
-   console.log(this.stadions);
-   
-   
-   
+      })
 
- 
-    
-   
-   
+    });
+    console.log(this.stadions);
   }
 
-  goToAddMatchPage(){
+  goToAddMatchPage() {
     this.navCtrl.push(AddMatchPage);
   }
 
-  goToMatchPage(match, key, stadiumId){
-    this.navCtrl.push(MatchPage,{'match':match, 'key': key, 'stadiumId': stadiumId});
-    
+  goToMatchPage(match, key, stadiumId) {
+    this.navCtrl.push(MatchPage, { 'match': match, 'key': key, 'stadiumId': stadiumId });
   }
 
-  goToSettings(){
+  goToSettings() {
     this.navCtrl.push(SettingsPage);
   }
-  goToHome(){
+  goToHome() {
     this.navCtrl.push(HomePage);
   }
 
-
-  getStadium(stadiumId){
-      return this.stad.getStadiumByKey(stadiumId);
+  getStadium(stadiumId) {
+    return this.stad.getStadiumByKey(stadiumId);
   }
 
-  
 
-  
 
-  
+
+
+
 
 }

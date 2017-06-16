@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AuthProvider} from '../../providers/auth/auth';
-import { TabsPage} from '../tabs/tabs';
+import { AuthProvider } from '../../providers/auth/auth';
+import { TabsPage } from '../tabs/tabs';
 import { RegistrationModalPage } from '../registration-modal/registration-modal';
-import { AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 import * as firebase from 'firebase/app';
 
@@ -27,7 +27,7 @@ export class LoginPage {
   password = null;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AuthProvider, public modalCtrl: ModalController) {
-    
+
   }
 
   ionViewDidLoad() {

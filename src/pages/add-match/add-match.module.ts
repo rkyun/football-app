@@ -13,4 +13,4 @@ import { AddMatchPage } from './add-match';
     AddMatchPage
   ]
 })
-export class AddMatchPageModule {}
+export class AddMatchPageModule { }

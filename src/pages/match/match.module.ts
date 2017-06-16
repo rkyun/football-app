@@ -13,4 +13,4 @@ import { MatchPage } from './match';
     MatchPage
   ]
 })
-export class MatchModule {}
+export class MatchModule { }

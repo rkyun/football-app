@@ -29,10 +29,10 @@ export class RegistrationModalPage {
     console.log('ionViewDidLoad RegistrationModalPage');
   }
 
-  submit(){
-    this.auth.signUp(this.email, this.password, this.name, this. number);
+  submit() {
+    this.auth.signUp(this.email, this.password, this.name, this.number);
     this.viewCtrl.dismiss();
-    
+
   }
 
 }

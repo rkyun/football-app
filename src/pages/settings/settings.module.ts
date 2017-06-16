@@ -13,4 +13,4 @@ import { SettingsPage } from './settings';
     SettingsPage
   ]
 })
-export class SettingsPageModule {}
+export class SettingsPageModule { }

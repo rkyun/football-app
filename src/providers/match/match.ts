@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/map';
-import { AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 /*
   Generated class for the MatchService provider.
@@ -12,105 +12,105 @@ import { AngularFireDatabase, FirebaseListObservable} from 'angularfire2/databas
 */
 @Injectable()
 export class MatchProvider {
-matches: FirebaseListObservable<any>;
+  matches: FirebaseListObservable<any>;
 
-match={
+  match = {
     date: Date,
     stadiumId: String,
     weather: String,
     description: String,
     players: [],
     teams: {
-      red:[],
-      white:[]
+      red: [],
+      white: []
     },
     status: String,
-    result:{
+    result: {
       red: Number,
       white: Number,
       winner: String
     },
     chat: []
-    
+
   };
 
 
 
 
-  
+
 
   constructor(public http: Http, public db: AngularFireDatabase) {
     console.log('Hello MatchService Provider');
     this.matches = db.list('/matches');
-   
+
   }
 
-  
+
   // db.database().ref('registered').on('value', snapshot => {
   //   console.log('changed');
   // })
 
-  init(){
-    
+  init() {
+
     this.matches.push({
       date: new Date().toISOString(),
       location: "WB",
       weather: "DOBRA",
-      players: ['rykun','michu']
+      players: ['rykun', 'michu']
     });
   }
 
-  get(){
+  get() {
     return this.matches;
   }
 
-  set(match){
+  set(match) {
     this.matches.push(match);
   }
-  getPlayers(){
+  getPlayers() {
     return this.match.players;
   }
 
-  update(id, match){
+  update(id, match) {
     this.matches.update(id, match);
   }
 
-  getMatchByKey(key){
-    return this.db.object('/matches/'+key);
+  getMatchByKey(key) {
+    return this.db.object('/matches/' + key);
   }
 
-  randomizeTeam(players){
+  randomizeTeam(players) {
     let rand;
     let player;
-    let _players=players.slice();
-    let red=[];
-    let white=[];
-    
-    for(let i=0; i<players.length; i++){
-      rand=Math.floor(Math.random()*_players.length);
-      player=_players[rand];
+    let _players = players.slice();
+    let red = [];
+    let white = [];
+
+    for (let i = 0; i < players.length; i++) {
+      rand = Math.floor(Math.random() * _players.length);
+      player = _players[rand];
       console.log(player);
-      if (i % 2 == 0){   
-          red.push(player);
-      } else{
-          white.push(player);
+      if (i % 2 == 0) {
+        red.push(player);
+      } else {
+        white.push(player);
       }
       _players.splice(rand, 1);
     }
-  return [red, white];
-}
+    return [red, white];
+  }
 
-getWeather(lang,long): Observable<any>{
-  return this.http.get(`http://api.openweathermap.org/data/2.5/forecast?lat=${lang}&lon=${long}&appid=e81bf78a7952363f796415666970a605&units=metric`)
-  .map(response => response.json());
-}
+  getWeather(lang, long): Observable<any> {
+    return this.http.get(`http://api.openweathermap.org/data/2.5/forecast?lat=${lang}&lon=${long}&appid=e81bf78a7952363f796415666970a605&units=metric`)
+      .map(response => response.json());
+  }
 
-listen(key) {
+  listen(key) {
 
-  return this.db.database.ref('matches/'+key);
+    return this.db.database.ref('matches/' + key);
 
 
-}
+  }
 
 
 

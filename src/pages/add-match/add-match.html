@@ -16,41 +16,40 @@
 
 
 <ion-content padding>
-<ion-list>
- <ion-item>
-  <ion-label floating>Rodzaj</ion-label>
-  <ion-select interface="popover" [(ngModel)]="match.type">
-    <ion-option value="Trening">Trening</ion-option>
-    <ion-option value="Mecz">Mecz</ion-option>
-  </ion-select>
- </ion-item>
+  <ion-list>
+    <ion-item>
+      <ion-label floating>Rodzaj</ion-label>
+      <ion-select interface="popover" [(ngModel)]="match.type">
+        <ion-option value="Trening">Trening</ion-option>
+        <ion-option value="Mecz">Mecz</ion-option>
+      </ion-select>
+    </ion-item>
 
-  <ion-item>
-    <ion-label floating>Data</ion-label>
-    <ion-datetime displayFormat="MMMM DD, YYYY" [(ngModel)]="match.date"></ion-datetime>
-  </ion-item>
+    <ion-item>
+      <ion-label floating>Data</ion-label>
+      <ion-datetime displayFormat="MMMM DD, YYYY" [(ngModel)]="match.date"></ion-datetime>
+    </ion-item>
 
-  <ion-item>
-    <ion-label floating>Czas</ion-label>
-    <ion-datetime displayFormat="HH:mm" [(ngModel)]="match.time"></ion-datetime>
-  </ion-item>
-
-
-  <ion-item>
-  <ion-label floating>Stadion</ion-label>
-  <ion-select interface="popover" [(ngModel)]="match.stadiumId">
-    <ion-option *ngFor="let stadium of stadiums | async" value="{{stadium.$key}}">{{stadium.name}}</ion-option>
-    
-  </ion-select>
- </ion-item>
-
-  <ion-item>
-    <ion-label floating>Dodatkowe informacje</ion-label>
-    <ion-input type="textarea" name="description" [(ngModel)]="match.description"></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label floating>Czas</ion-label>
+      <ion-datetime displayFormat="HH:mm" [(ngModel)]="match.time"></ion-datetime>
+    </ion-item>
 
 
-</ion-list>
-<button block ion-button (click)="submit()">Zapisz</button>
+    <ion-item>
+      <ion-label floating>Stadion</ion-label>
+      <ion-select interface="popover" [(ngModel)]="match.stadiumId">
+        <ion-option *ngFor="let stadium of stadiums | async" value="{{stadium.$key}}">{{stadium.name}}</ion-option>
+
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Dodatkowe informacje</ion-label>
+      <ion-input type="textarea" name="description" [(ngModel)]="match.description"></ion-input>
+    </ion-item>
+
+
+  </ion-list>
+  <button block ion-button (click)="submit()">Zapisz</button>
 </ion-content>
-

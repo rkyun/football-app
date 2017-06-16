@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
-import { MatchProvider} from '../../providers/match/match';
-import {StadiumProvider} from '../../providers/stadium/stadium';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { MatchProvider } from '../../providers/match/match';
+import { StadiumProvider } from '../../providers/stadium/stadium';
 import { HomePage } from '../home/home';
 import { SettingsPage } from '../settings/settings';
 /**
@@ -18,7 +18,7 @@ import { SettingsPage } from '../settings/settings';
   providers: [AngularFireDatabase, MatchProvider, StadiumProvider]
 })
 export class AddMatchPage {
-   match ={
+  match = {
     type: null,
     date: null,
     time: null,
@@ -28,11 +28,11 @@ export class AddMatchPage {
     description: null,
     players: [],
     teams: {
-      red:[],
-      white:[]
+      red: [],
+      white: []
     },
     status: null,
-    result:{
+    result: {
       red: null,
       white: null,
       winner: null
@@ -40,40 +40,39 @@ export class AddMatchPage {
   };
   data: any;
   stadiums: any;
-  
-  constructor(public navCtrl: NavController, public navParams: NavParams,public _data: MatchProvider, public stadium: StadiumProvider) {
-   this.data=_data;
-   this.stadiums=stadium.get();
-   console.log('siema z konstruktora');
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public _data: MatchProvider, public stadium: StadiumProvider) {
+    this.data = _data;
+    this.stadiums = stadium.get();
+    console.log('siema z konstruktora');
   }
 
-
-  
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddMatchPage');
     console.log('SIEMA');
   }
 
-  goToSettings(){
+  goToSettings() {
     this.navCtrl.push(SettingsPage);
   }
-  goToHome(){
+
+  goToHome() {
     this.navCtrl.push(HomePage);
   }
- 
-  submit(){
-    this.match.timestamp=Math.floor(Date.parse(new Date(this.match.date + ' ' + this.match.time).toUTCString())/ 1000);
-    
-    this.match.status="Planowany";
+
+  submit() {
+    this.match.timestamp = Math.floor(Date.parse(new Date(this.match.date + ' ' + this.match.time).toUTCString()) / 1000);
+
+    this.match.status = "Planowany";
     this.data.set(this.match);
     this.navCtrl.push(HomePage);
   }
-  
-  getStadiums(){
+
+  getStadiums() {
 
   }
 
-  
-  
+
+
 
 }

@@ -8,28 +8,28 @@
 
 
 <ion-content padding>
-<ion-list>
+  <ion-list>
 
-  <ion-item>
-   
-    <ion-input type="text" name="nick" [(ngModel)]="name" placeholder="Nick"></ion-input>
-  </ion-item>
+    <ion-item>
 
-  <ion-item>
-    <ion-input type="text" name="email" [(ngModel)]="email" placeholder="E-mail"></ion-input>
-  </ion-item>
-  
-  <ion-item>
-   
-    <ion-input type="password" name="password" [(ngModel)]="password" placeholder="Hasło"></ion-input>
-  </ion-item>
-  <ion-item>
-    
-    <ion-input type="text" name="number" [(ngModel)]="number" placeholder="Numer na koszulce"></ion-input>
-  </ion-item>
+      <ion-input type="text" name="nick" [(ngModel)]="name" placeholder="Nick"></ion-input>
+    </ion-item>
 
-</ion-list>
-<div class="options">
-  <button class="login" ion-button (click)="submit()">Zarejestruj</button>
-</div>
+    <ion-item>
+      <ion-input type="text" name="email" [(ngModel)]="email" placeholder="E-mail"></ion-input>
+    </ion-item>
+
+    <ion-item>
+
+      <ion-input type="password" name="password" [(ngModel)]="password" placeholder="Hasło"></ion-input>
+    </ion-item>
+    <ion-item>
+
+      <ion-input type="text" name="number" [(ngModel)]="number" placeholder="Numer na koszulce"></ion-input>
+    </ion-item>
+
+  </ion-list>
+  <div class="options">
+    <button class="login" ion-button (click)="submit()">Zarejestruj</button>
+  </div>
 </ion-content>

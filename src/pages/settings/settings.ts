@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { HomePage } from '../home/home';
-import { AddStadiumPage} from '../add-stadium/add-stadium';
+import { AddStadiumPage } from '../add-stadium/add-stadium';
 
-import { AuthProvider} from '../../providers/auth/auth';
+import { AuthProvider } from '../../providers/auth/auth';
 /**
  * Generated class for the SettingsPage page.
  *
@@ -22,17 +22,17 @@ export class SettingsPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public auth: AuthProvider) {
   }
 
-  goToSettings(){
+  goToSettings() {
     this.navCtrl.push(SettingsPage);
   }
-  goToHome(){
+  goToHome() {
     this.navCtrl.push(HomePage);
   }
 
-  signOut(){
+  signOut() {
     this.auth.signOut();
   }
-  goToAddStadiumPage(){
+  goToAddStadiumPage() {
     this.navCtrl.push(AddStadiumPage);
   }
 
